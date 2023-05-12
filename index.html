@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>map of LT care</title>
+		<meta charset="utf-8" />
+		<!--<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+			-->
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href=""/></noscript>
+	</head>
+	<body>
+		<div class="map" id="map"></div>
+
+		<script type="text/javascript">
+			var map;
+			function initMap() {
+				map = new google.maps.Map(document.getElementById('map'), {
+					center: {lat: 25.04, lng: 121.512},
+					zoom: 18
+				});
+			}
+		</script>
+        <scrip async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBH4AfMMBKt26TvIKLywAfMZzjV7AscLhc&callback=initMap"></script>
+        <script async defer src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script async defer src="assets/js/main.js"></script>
+	</body>
+</html>
