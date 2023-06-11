@@ -3,9 +3,257 @@ html, body{
     height: 100%;
     margin: 0;
     padding: 0;
+    display: flex;
+    flex-direction: column;
 }
 
 .map{
     width: 100%;
     height: 100%;
+    z-index: 1;
 }
+
+/*below are css for the search bar*/
+header{
+    height: auto;
+    padding: 0;
+    margin: 0;
+    position: fixed;
+    background: rgba(238, 235, 231);
+}
+
+.searchField{
+    width: 400px;
+    z-index: 4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2em;
+
+    @media screen and (max-width:450px) {
+        width: 100%;
+        display: flex;
+        border-radius: 0em;
+    }
+}
+
+.selectField{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ===== Resets and Housekeeping ===== */
+* {
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  font-size: 11px;
+}
+
+/* ===== Actual Styles ===== */
+
+/* ===== Select Box ===== */
+.sel, .searchBar {
+  font-size: 10px;
+  margin: 1.5em 2em;
+  width: 90%;
+  height: 4em;
+  background-color: transparent;
+  position: relative;
+  cursor: pointer;
+}
+
+.searchBar{
+  display: flex;
+  flex-direction: row;
+}
+
+.fas{
+  display: inline-block;
+  position: absolute;
+  width: 10%;
+  height: 100%;
+  display: block;
+  font-weight: 900;
+  font-family: 'FontAwesome';
+  font-size: 2em;
+  color: rgba(0, 0, 0, 0.3);
+  right: 0px;
+  top: calc(50% - 0.6em);
+}
+
+.fas::before{
+  display: inline-block;
+  font-style: normal;
+  content: '\f002';
+  color: rgba(0, 0, 0, 0.3);
+  right: 10px;
+  top: 50%;
+}
+
+/* .searchBar::before {
+    position: absolute;
+    content: '\f002';
+    font-family: 'FontAwesome';
+    font-size: 2em;
+    color: rgba(0, 0, 0, 0.3);
+    right: 10px;
+    top: calc(50% - 0.5em);
+} */
+
+.sel::before {
+  position: absolute;
+  content: '\f063';
+  font-family: 'FontAwesome';
+  font-size: 2em;
+  color: rgba(0, 0, 0, 0.3);
+  right: 3px;
+  top: calc(50% - 0.5em);
+}
+
+input[type=address]{
+    width: 80%;
+    height: 100%;
+    padding-left: 0.5em;
+    background: none;
+    border: none;
+    border-style: hidden;
+    color: #838e95;
+    font-size: 2.3em;
+    font-family: 'Quicksand';
+}
+
+input[type=address]::placeholder{
+    color: inherit;
+    font-size: inherit;
+    font-family: inherit;
+}
+
+input[type=address]:focus{
+    outline: none;
+}
+
+.sel.active::before {
+  transform: rotateX(-180deg);
+}
+
+.sel__placeholder {
+    width: 70%;
+  display: block;
+  font-family: 'Quicksand';
+  font-size: 2.3em;
+  color: #838e95;
+  padding: 0.2em 0.5em;
+  text-align: left;
+  pointer-events: none;
+  user-select: none;
+  visibility: visible;
+}
+
+.sel.active .sel__placeholder {
+  visibility: hidden;
+}
+
+.sel__placeholder::before {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0.2em 0.5em;
+  content: attr(data-placeholder);
+  visibility: hidden;
+}
+
+.sel.active .sel__placeholder::before {
+  visibility: visible;
+}
+
+.sel__box {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: -4px;
+  display: none;
+  list-style-type: none;
+  text-align: left;
+  font-size: 1em;
+  background-color: #FFF;
+  width: calc(100% + 8px);
+  box-sizing: border-box;
+}
+
+.sel.active .sel__box {
+  display: block;
+  animation: fadeInUp 500ms;
+}
+
+.sel__box__options {
+  display: list-item;
+  font-family: 'Quicksand';
+  font-size: 1.5em;
+  color: #838e95;
+  padding: 0.5em 1em;
+  user-select: none;
+}
+
+.sel__box__options::after {
+  content: '\f00c';
+  font-family: 'FontAwesome';
+  font-size: 0.5em;
+  margin-left: 5px;
+  display: none;
+}
+
+.sel__box__options.selected::after {
+  display: inline;
+}
+
+.sel__box__options:hover {
+  background-color: #ebedef;
+}
+
+/* ----- Select Box Black Panther ----- */
+.sel, .searchBar {
+  border-bottom: 4px solid rgba(0, 0, 0, 0.3);
+}
+
+.sel--black-panther {
+  z-index: 3;
+}
+
+/* ----- Select Box Superman ----- */
+.sel--superman {
+/*   display: none; */
+  z-index: 2;
+}
+
+/* ===== Keyframes ===== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 20px, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
