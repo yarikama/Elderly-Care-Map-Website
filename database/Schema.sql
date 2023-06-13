@@ -7,7 +7,7 @@ USE Final_Project;
 CREATE TABLE
     `institution` (
         `ins_num` smallint NOT NULL,
-        `ins_name` varchar(50) NOT NULL,
+        `ins_name` varchar(100) NOT NULL,
         PRIMARY KEY (`ins_num`),
         CONSTRAINT `uc_institution_ins_name` UNIQUE (`ins_name`)
     );
@@ -30,10 +30,10 @@ CREATE TABLE
 CREATE TABLE
     `ins_info` (
         `ins_num` smallint NOT NULL,
-        `manager` varchar(28) NOT NULL,
+        `manager` varchar(100) NOT NULL,
         `phone` varchar(50) NOT NULL,
         `email` varchar(100) NOT NULL,
-        `website` varchar(500) NOT NULL,
+        `website` varchar(250) NOT NULL,
         PRIMARY KEY (`ins_num`)
     );
 
@@ -41,8 +41,8 @@ CREATE TABLE
     `ins_address` (
         `ins_num` smallint NOT NULL,
         `add` varchar(100) NOT NULL,
-        `city` char(6) NOT NULL,
-        `dist` varchar(15) NOT NULL,
+        `city` char(30) NOT NULL,
+        `dist` varchar(50) NOT NULL,
         `longitude` float NOT NULL,
         `latitude` float NOT NULL,
         PRIMARY KEY (`ins_num`)
@@ -59,7 +59,7 @@ CREATE TABLE
 CREATE TABLE
     `func_web` (
         `func_name` varchar(60) NOT NULL,
-        `func_website` varchar(500) NOT NULL,
+        `func_website` varchar(250) NOT NULL,
         PRIMARY KEY (`func_name`)
     );
 
@@ -84,7 +84,7 @@ CREATE TABLE
     tmp1 (
         public_private varchar(50) NOT NULL,
         ins_name varchar(200),
-        website varchar(2000),
+        website varchar(250),
         host_name varchar(50),
         dist varchar(50),
         addr varchar(200),
