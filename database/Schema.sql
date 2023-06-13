@@ -135,6 +135,4 @@ REFERENCES `user` (`user_id`);
 ALTER TABLE `user_favorite` ADD CONSTRAINT `fk_user_favorite_ins_num` FOREIGN KEY(`ins_num`)
 REFERENCES `institution` (`ins_num`);
 
-LOAD DATA INFILE '/var/lib/mysql-files/final.csv' 
-INTO TABLE tmp1 
-FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\n';
+-- 用phpmyadmin匯入csv檔案
