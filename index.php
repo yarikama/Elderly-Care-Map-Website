@@ -36,7 +36,7 @@
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 	<script async defer
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVRZ4YS4Xzl2lAV6kv5tFdFWs7T3GAYiU&callback=initMap">
+		src="https://maps.googleapis.com/maps/api/js?key=yourkey&callback=initMap">
 		</script>
 	<script src="assets/js/districts.js"></script>
 	<script src="assets/js/main.js"></script>
