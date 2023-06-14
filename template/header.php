@@ -29,13 +29,13 @@
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#topNav" aria-controls="topNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-          <img src="images/logo.png" alt="longcare Logo" style="max-height: 40px;"> 
+          <img src="img/longcare.png" alt="EMO大書店 Logo" style="max-height: 40px;"> 
           <a class="navbar-brand" href="index.php">全國長照機構</a>
         </div>
 
         <!--/.navbar-collapse -->
         <div class="collapse navbar-collapse" id="topNav">
-          <ul class="nav navbar-nav">
+          <ul class="nav navbar-nav">1
             <?php if(isset($_SESSION['member']['member_type']) && $_SESSION['member']['member_type'] == 3): ?>
               <li class="nav-item"><a class="nav-link" href="manage_system.php"><span class="fa fa-th-list"></span> 管理系統</a></li>
 
