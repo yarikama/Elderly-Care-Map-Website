@@ -3,16 +3,20 @@
 	// require_once "./functions/admin.php";
 	$title = "Order Information";
 	require_once "./template/header.php";
-	require_once "./functions/database_functions.php";
+	require_once "./function/database_function.php";
     
-    $memberid = $_SESSION['member']['member_ID'];
+    $memberid = 1; //待改 $_SESSION['member']['member_ID']
 
 	$conn = db_connect();
-	$sql = "SELECT 
+	$sql = "SELECT member_ID, institution.ins_num
 	FROM member_favorite, institution
     WHERE member_ID = '$memberid' AND institution.ins_num = member_favorite.ins_num
     ;";
     $result = mysqli_query($conn, $sql);
+    if(!$result){
+        echo "Can't retrieve data " . mysqli_error($conn);
+        exit;
+      }
 ?>
 <div><br></div>
 <nav aria-label="breadcrumb" style="display: flex; justify-content: center;">
@@ -22,7 +26,7 @@
         <li class="breadcrumb-item"><a href="user_view_coupon.php" class="text-decoration-none text-muted fw-light">查看優惠券</a></li>
     </ol>
 </nav>
-<h4 class="fw-bolder text-center">機構資訊</h4>
+<h4 class="fw-bolder text-center">機構喜愛列表</h4>
 <center>
 <hr class="bg-warning" style="width:5em;height:3px;opacity:1">
 </center>
