@@ -6,7 +6,7 @@ USE Final_Project;
 
 CREATE TABLE
     institution (
-        ins_num smallint NOT NULL,
+        ins_num int NOT NULL,
         ins_name varchar(100) NOT NULL,
         PRIMARY KEY (ins_num),
         CONSTRAINT uc_institution_ins_name UNIQUE (ins_name)
@@ -14,32 +14,30 @@ CREATE TABLE
 
 CREATE TABLE
     ins_capacity (
-        ins_num smallint NOT NULL,
-        caring_num smallint NOT NULL,
-        nurse_num smallint NOT NULL,
-        dem_num smallint NOT NULL,
+        ins_num int NOT NULL,
+        caring_num int NOT NULL,
+        nurse_num int NOT NULL,
+        dem_num int NOT NULL,
         -- derived
-        emp_num smallint NOT NULL,
-        long_caring_num smallint NOT NULL,
+        long_caring_num int NOT NULL,
         -- derived
-        housing_num smallint NOT NULL,
-        providing_num smallint NOT NULL,
+        housing_num int NOT NULL,
+        providing_num int NOT NULL,
         PRIMARY KEY (ins_num)
     );
 
 CREATE TABLE
     ins_info (
-        ins_num smallint NOT NULL,
+        ins_num int NOT NULL,
         manager varchar(100) NOT NULL,
         phone varchar(50) NOT NULL,
-        email varchar(100) NOT NULL,
         website varchar(250) NOT NULL,
         PRIMARY KEY (ins_num)
     );
 
 CREATE TABLE
     ins_address (
-        ins_num smallint NOT NULL,
+        ins_num int NOT NULL,
         addr varchar(100) NOT NULL,
         city char(30) NOT NULL,
         dist varchar(50) NOT NULL,
@@ -50,9 +48,9 @@ CREATE TABLE
 
 CREATE TABLE
     type_func (
-        int_num smallint NOT NULL,
+        ins_num int NOT NULL,
         func_name varchar(60) NOT NULL,
-        PRIMARY KEY (int_num)
+        PRIMARY KEY (ins_num, func_name)
     );
 
 CREATE TABLE
@@ -63,7 +61,7 @@ CREATE TABLE
     );
 
 CREATE TABLE
-    member (
+    `member` (
         member_id int NOT NULL AUTO_INCREMENT,
         member_name varchar(50) NOT NULL,
         member_email varchar(100) NOT NULL UNIQUE,
@@ -75,13 +73,13 @@ CREATE TABLE
 CREATE TABLE
     member_favorite (
         member_id int NOT NULL,
-        ins_num smallint NOT NULL,
+        ins_num int NOT NULL,
         PRIMARY KEY (member_id, ins_num)
     );
 
 CREATE TABLE
     tmp1 (
-        ins_num smallint NOT NULL AUTO_INCREMENT,
+        ins_num int NOT NULL AUTO_INCREMENT PRIMARY KEY,
         public_private varchar(50) NOT NULL,
         ins_name varchar(200),
         website varchar(250),
@@ -119,7 +117,7 @@ ADD
 
 ALTER TABLE type_func
 ADD
-    CONSTRAINT fk_type_func_int_num FOREIGN KEY(int_num) REFERENCES institution (ins_num);
+    CONSTRAINT fk_type_func_ins_num FOREIGN KEY(ins_num) REFERENCES institution (ins_num);
 
 ALTER TABLE type_func
 ADD
@@ -127,10 +125,11 @@ ADD
 
 ALTER TABLE member_favorite
 ADD
-    CONSTRAINT fk_member_favorite_member_id FOREIGN KEY(member_id) REFERENCES member (member_id);
+    CONSTRAINT fk_member_favorite_member_id FOREIGN KEY(member_id) REFERENCES `member` (member_id);
 
 ALTER TABLE member_favorite
 ADD
     CONSTRAINT fk_member_favorite_ins_num FOREIGN KEY(ins_num) REFERENCES institution (ins_num);
 
 -- 用phpmyadmin匯入csv檔案
+-- public_private,ins_name,website,host_name,dist,addr,phone0,phone1,orient0,orient1,orient2,orient3,init_date,total_bed_num,long_caring,nursing,dementia,caring,total_toll,latitude,longitude
