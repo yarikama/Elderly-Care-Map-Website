@@ -51,7 +51,6 @@ CREATE TABLE
 CREATE TABLE
     type_func (
         int_num smallint NOT NULL,
-        type smallint NOT NULL,
         func_name varchar(60) NOT NULL,
         PRIMARY KEY (int_num)
     );
@@ -64,20 +63,20 @@ CREATE TABLE
     );
 
 CREATE TABLE
-    user (
-        user_id int NOT NULL,
-        user_name varchar(50) NOT NULL,
-        user_email varchar(100) NOT NULL,
-        user_password varchar(50) NOT NULL,
-        PRIMARY KEY (user_id),
-        CONSTRAINT uc_user_user_name UNIQUE (user_name)
+    member (
+        member_id int NOT NULL AUTO_INCREMENT,
+        member_name varchar(50) NOT NULL,
+        member_email varchar(100) NOT NULL UNIQUE,
+        member_password varchar(50) NOT NULL,
+        PRIMARY KEY (member_id),
+        CONSTRAINT uc_member_member_name UNIQUE (member_name)
     );
 
 CREATE TABLE
-    user_favorite (
-        user_id int NOT NULL,
+    member_favorite (
+        member_id int NOT NULL,
         ins_num smallint NOT NULL,
-        PRIMARY KEY (user_id, ins_num)
+        PRIMARY KEY (member_id, ins_num)
     );
 
 CREATE TABLE
@@ -102,8 +101,8 @@ CREATE TABLE
         dementia int,
         caring int,
         total_toll int,
-        latitude varchar(100),
-        longitude varchar(100)
+        latitude float,
+        longitude float
     );
 
 ALTER TABLE ins_address
@@ -126,7 +125,12 @@ ALTER TABLE type_func
 ADD
     CONSTRAINT fk_type_func_func_name FOREIGN KEY(func_name) REFERENCES func_web (func_name);
 
-ALTER TABLE user_favorite
+ALTER TABLE member_favorite
 ADD
-    CONSTRAINT fk_user_favorite_user_id FOREIGN KEY(user_id) REFERENCES institution (ins_num);
+    CONSTRAINT fk_member_favorite_member_id FOREIGN KEY(member_id) REFERENCES member (member_id);
+
+ALTER TABLE member_favorite
+ADD
+    CONSTRAINT fk_member_favorite_ins_num FOREIGN KEY(ins_num) REFERENCES institution (ins_num);
+
 -- 用phpmyadmin匯入csv檔案
