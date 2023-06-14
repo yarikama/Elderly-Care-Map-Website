@@ -42,7 +42,7 @@
       <select class="form-select rounded-0" id="city" name="city" style="width: 50px; height: 40px;" >
         <?php
         $conn = db_connect();
-        $sql = "SELECT distinct city FROM ins_address order by city";
+        $sql = "SELECT distinct city FROM ins_address";
         $result = mysqli_query($conn, $sql);
         while($row = mysqli_fetch_assoc($result)){
         echo "<option value=\"".$row['city']."\">".$row['city']."</option>";
@@ -55,12 +55,15 @@
       <div style="display: block; text-align: center;">
         <button type="submit" name="next" class="btn btn-secondary rounded-0">下一步</button>
       </div>
-      
     </div>
-
     </form>
   </div>
 </div>
+<div style="text-align: center;">
+  <hr class="bg-warning" style="width: 150ex; height: 1px; opacity: 1; margin-left: auto; margin-right: auto;">
+</div>
+
+
 <?php
 $conn = db_connect();
 

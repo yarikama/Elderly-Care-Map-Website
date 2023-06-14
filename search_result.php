@@ -10,10 +10,13 @@
   $sql = "SELECT distinct institution.ins_num, ins_name
   FROM type_func, institution, ins_address 
   WHERE institution.ins_num = type_func.ins_num AND institution.ins_num = ins_address.ins_num 
-  AND city = '$city' AND dist = '$dist' ";
+  AND city = '$city' ";
   
   $conditions = array();
   $func_name = array();
+  if($_POST['dist'] != "全區域"){
+    $sql .= " AND dist = '$dist' ";
+  }
   if (isset($_POST['長照'])){
     $conditions[] = "func_name = '長照'";
     $func_name[] = "長照";

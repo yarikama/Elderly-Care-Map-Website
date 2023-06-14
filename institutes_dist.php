@@ -22,9 +22,12 @@
   }
 
   .custom-checkbox input[type="checkbox"] {
-    transform: scale(1.5); /* 改变勾选框的大小 */
+    transform: scale(2); /* 改变勾选框的大小 */
     margin-right: 10px; /* 调整勾选框与文本之间的间距 */
-  }      
+  }
+  .custom-checkbox label {
+    font-size: 20px; /* 调整标签的字体大小 */
+  }
 </style>
 <?php
 if(isset($_POST['next'])){
@@ -47,9 +50,10 @@ if(isset($_POST['next'])){
       <input type="text" name="city" class="form-control rounded-0" value="<?php echo $city?>" disabled>
       <label for="pub_year" class="control-label ">&nbsp&nbsp所在區域&nbsp&nbsp;</label>
       <select class="form-select rounded-0" id="dist" name="dist" style="width: 50px; height: 40px;" >
+        <option value="全區域">全區域</option>
         <?php
         $conn = db_connect();
-        $sql = "SELECT distinct dist FROM ins_address WHERE city = $city order by dist";
+        $sql = "SELECT distinct dist FROM ins_address WHERE city = '{$city}'";
         $result = mysqli_query($conn, $sql);
         while($row = mysqli_fetch_assoc($result)){
         echo "<option value=\"".$row['dist']."\">".$row['dist']."</option>";
@@ -86,6 +90,9 @@ if(isset($_POST['next'])){
 
     </form>
   </div>
+</div>
+<div style="text-align: center;">
+  <hr class="bg-warning" style="width: 150ex; height: 1px; opacity: 1; margin-left: auto; margin-right: auto;">
 </div>
 <?php
 $conn = db_connect();
