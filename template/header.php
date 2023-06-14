@@ -29,25 +29,29 @@
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#topNav" aria-controls="topNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-          <img src="emo.png" alt="EMO大書店 Logo" style="max-height: 40px;"> 
-          <a class="navbar-brand" href="index.php">EMO大書店</a>
+          <img src="img/longcare.png" alt="EMO大書店 Logo" style="max-height: 40px;"> 
+          <a class="navbar-brand" href="index.php">全國長照機構</a>
         </div>
 
         <!--/.navbar-collapse -->
         <div class="collapse navbar-collapse" id="topNav">
           <ul class="nav navbar-nav">
+            <?php if(isset($_SESSION['member']['member_type']) && $_SESSION['member']['member_type'] == 3): ?>
               <li class="nav-item"><a class="nav-link" href="manage_system.php"><span class="fa fa-th-list"></span> 管理系統</a></li>
 
               <li class="nav-item"><a class="nav-link" href="admin_register.php"><span class="fa fa-user-plus"></span> 新增員工</a></li>
 			        <li class="nav-item"><a class="nav-link" href="admin_logout.php"><span class="fa fa-sign-out-alt"></span> 員工登出</a></li>
+            <?php elseif(isset($_SESSION['member']) && $_SESSION['member'] == true): ?>
                 <li class="nav-item"><a class="nav-link" href="member_info.php"><span class="fa fa-home"></span> 個人資料</a></li>
                 <li class="nav-item"><a class="nav-link" href="books.php"><span class="fa fa-book"></span> 選好書</a></li>
                 <li class="nav-item"><a class="nav-link" href="cart.php"><span class="fa fa-shopping-cart"></span> 購物車</a></li>
                 <li class="nav-item"><a class="nav-link" href="member_logout.php"><span class="fa fa-sign-out"></span> 會員登出</a></li>
-              <li class="nav-item"><a class="nav-link" href="books.php"><span class="fa fa-book"></span> 選好書</a></li>
+            <?php else: ?>
+              <li class="nav-item"><a class="nav-link" href="institutes.php"><span class="fa fa-book"></span> 快速搜尋</a></li>
               <li class="nav-item"><a class="nav-link" href="cart.php"><span class="fa fa-shopping-cart"></span> 購物車</a></li>
               <li class="nav-item"><a class="nav-link" href="member_login.php"><span class="fa fa-sign-in"></span> 會員登入</a></li>
               <li class="nav-item"><a class="nav-link" href="member_register.php"><span class="fa fa-user-plus"></span> 會員註冊</a></li>
+            <?php endif; ?>
             </ul>
         </div>
       </div>
