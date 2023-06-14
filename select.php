@@ -5,6 +5,14 @@
         $area = $_POST["selectArea"];
         $address = $_POST["typeAddress"];
     }
+    $area = $_POST["selectArea"];
+    $address = $_POST["typeAddress"];
+    if($address!=''){
+        echo address;
+    }
+    if($area!=''){
+        echo area;
+    }
     $conn = mysqli_connect("hostname", "username", "password", "database");
 
     $sql = "SELECT * FROM ins_address, institution WHERE

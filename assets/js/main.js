@@ -105,13 +105,13 @@ function sendAddress(method, address){
         data: JSON.stringify(dataJSON),
         type: "POST",
         dataType: "json",
-        contentType: "application/json;charset=utf-8",
         success: function(resp){
             alert(resp);
         },
         error: function(xhr, ajaxOptions, thrownError){
-            alert(xhr.status);
-            alert(thrownError);
+            console.log(xhr.status);
+            console.log(ajaxOptions);
+            console.log(thrownError);
         }
     });
 }
