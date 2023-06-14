@@ -50,7 +50,7 @@
 
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="books.php" class="text-decoration-none text-muted fw-light">總覽</a></li>
+        <li class="breadcrumb-item"><a href="institutes.php" class="text-decoration-none text-muted fw-light">總覽</a></li>
         <li class="breadcrumb-item active">搜尋結果</li>
     </ol>
 </nav>
