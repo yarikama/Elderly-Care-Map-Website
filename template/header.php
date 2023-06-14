@@ -36,19 +36,17 @@
         <!--/.navbar-collapse -->
         <div class="collapse navbar-collapse" id="topNav">
           <ul class="nav navbar-nav">
-            <?php if(isset($_SESSION['member']['member_type']) && $_SESSION['member']['member_type'] == 3): ?>
+            <?php if(isset($_SESSION['member']['member_type']) && $_SESSION['member']['member_type'] == 2): ?>
               <li class="nav-item"><a class="nav-link" href="manage_system.php"><span class="fa fa-th-list"></span> 管理系統</a></li>
-
-              <li class="nav-item"><a class="nav-link" href="admin_register.php"><span class="fa fa-user-plus"></span> 新增員工</a></li>
-			        <li class="nav-item"><a class="nav-link" href="admin_logout.php"><span class="fa fa-sign-out-alt"></span> 員工登出</a></li>
+              <li class="nav-item"><a class="nav-link" href="admin_register.php"><span class="fa fa-user-plus"></span> 新增管理員</a></li>
+			        <li class="nav-item"><a class="nav-link" href="admin_logout.php"><span class="fa fa-sign-out-alt"></span> 管理員登出</a></li>
             <?php elseif(isset($_SESSION['member']) && $_SESSION['member'] == true): ?>
+                <li class="nav-item"><a class="nav-link" href="institutes.php"><span class="fa fa-book"></span> 快速搜尋</a></li>
                 <li class="nav-item"><a class="nav-link" href="member_info.php"><span class="fa fa-home"></span> 個人資料</a></li>
-                <li class="nav-item"><a class="nav-link" href="books.php"><span class="fa fa-book"></span> 選好書</a></li>
-                <li class="nav-item"><a class="nav-link" href="cart.php"><span class="fa fa-shopping-cart"></span> 購物車</a></li>
+                <li class="nav-item"><a class="nav-link" href="member_favorite.php"><span class="fa fa-book"></span> 喜愛列表</a></li>
                 <li class="nav-item"><a class="nav-link" href="member_logout.php"><span class="fa fa-sign-out"></span> 會員登出</a></li>
             <?php else: ?>
               <li class="nav-item"><a class="nav-link" href="institutes.php"><span class="fa fa-book"></span> 快速搜尋</a></li>
-              <li class="nav-item"><a class="nav-link" href="cart.php"><span class="fa fa-shopping-cart"></span> 購物車</a></li>
               <li class="nav-item"><a class="nav-link" href="member_login.php"><span class="fa fa-sign-in"></span> 會員登入</a></li>
               <li class="nav-item"><a class="nav-link" href="member_register.php"><span class="fa fa-user-plus"></span> 會員註冊</a></li>
             <?php endif; ?>
