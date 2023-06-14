@@ -1,46 +1,37 @@
-<!DOCTYPE HTML>
-<html>
+<?php
+session_start();
+$title = "長照地圖";
+require_once "./template/header.php";
+?>
 
-<head>
-	<title>Long term care</title>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-	<meta http-equiv="content-type" content="text/html; charset=utf-8">
-	<link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css' rel='stylesheet'>
-	<link rel="stylesheet" href="assets/css/main.css" />
-	<noscript>
-		<link rel="stylesheet" href="assets/css/noscript.css" />
-	</noscript>
-</head>
+<div style="width: 300px; padding: 20px; box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1); border-radius: 8px; position: absolute; right: 40px; top: 50px; z-index: 100; background-color: gray;">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <input type="address" id="address" spellcheck="false" placeholder="請輸入地址" autocomplete="off" style="width: 80%; padding: 10px; border: none; border-bottom: 1px solid #ccc; font-size: 16px;">
+        <button id="searchBtn" style="background-color: #008CBA; color: white; padding: 10px 24px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px;">搜索</button>
+    </div>
+    <div style="display: flex; justify-content: space-between; margin-top: 20px;">
+        <select name="select-profession" id="select-county" style="width: 45%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; background-color: #f8f8f8; font-size: 16px;">
+            <option value="" disabled>縣市</option>
+        </select>
+        <select name="select-superpower" id="select-district" style="width: 45%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; background-color: #f8f8f8; font-size: 16px;">
+            <option value="" disabled>鄉鎮市區</option>
+        </select>
+    </div>
+</div>
 
-<body>
-	<header class="searchField">
-		<div class="searchBar">
-			<input type="address" id="address" spellcheck="false" placeholder="請輸入地址" autocomplete="off">
-			<i class="fa-solid fa-magnifying-glass fas fa-file" id="searchBtn"></i>
-		</div>
-		<div class="selectField">
-			<div class="sel sel--black-panther" id="countySelect">
-				<select name="select-profession" id="select-county">
-					<option value="" disabled>縣市</option>
-				</select>
-			</div>
-			<div class="sel sel--superman" id="districtSelect">
-				<select name="select-superpower" id="select-district">
-					<option value="" disabled>鄉鎮市區</option>
-				</select>
-			</div>
-		</div>
-	</header>
-	<div id="map" class="map"></div>
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-	<script async defer
-		src="https://maps.googleapis.com/maps/api/js?key=yourkey&callback=initMap">
-		</script>
-	<script src="assets/js/districts.js"></script>
-	<script src="assets/js/main.js"></script>
-	<script src="assets/js/style.js"></script>
-</body>
+<!-- Google Maps Integration -->
+<div id="map" style="height: 700px;"></div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script async defer
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVRZ4YS4Xzl2lAV6kv5tFdFWs7T3GAYiU&callback=initMap">
+</script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/search.js"></script>
+<!--script src="assets/js/style.js"></script-->
+<script src="assets/js/districts.js"></script>
 
-</html>
+
+<?php
+	require_once "./template/footer.php";
+?>
