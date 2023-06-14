@@ -2,9 +2,6 @@
   session_start();
   $count = 0;
   // connecto database
-  require_once "./functions/database_functions.php";
-  
-
   $title = "Long-term care institutions";
   require_once "./template/header.php";
 ?>
@@ -49,6 +46,8 @@
         }
         ?>            
       </select>
+      <label for="pub_year" class="control-label ">&nbsp&nbsp所在區域&nbsp&nbsp;</label>
+      <input type="text" name="all" class="form-control rounded-0" value="全區域" disabled>
     </div>
     <br/>
     <div class="input-group input-group-vertical">
