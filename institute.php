@@ -74,7 +74,7 @@
                   <h4>機構資訊</h4>
                   <table class="table">
                     
-                    <form method="post" action="cart.php">
+                    <form method="post" action="process.php">
                       <input type="hidden" name="ins_num" value="<?php echo $ins_num;?>">
                     <tr>
                       <th>服務項目</th>
@@ -133,7 +133,7 @@
                   </table>
                   
                     <div class="text-center">
-                      <input type="submit" value="加入喜愛列表" name="good_list" class="btn btn-primary rounded-0">
+                      <input type="submit" value="加入喜愛清單" name="good_list" class="btn btn-primary rounded-0">
                     </div>
                   </form>
               </div>
