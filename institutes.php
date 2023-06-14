@@ -44,6 +44,7 @@
         while($row = mysqli_fetch_assoc($result)){
         echo "<option value=\"".$row['city']."\">".$row['city']."</option>";
         }
+        
         ?>            
       </select>
       <label for="pub_year" class="control-label ">&nbsp&nbsp所在區域&nbsp&nbsp;</label>
