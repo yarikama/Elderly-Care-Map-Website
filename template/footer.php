@@ -4,7 +4,7 @@
 			<div class="container">
 				<div class="d-flex justify-content-between">
 					<div class="">
-						<a href="" target="_blank" class="text-decoration-none text-muted fw-bold smaller-text"> 交大工工EMO書店 &copy; <?= "EMO IEM" ?> </a>
+						<a href="" target="_blank" class="text-decoration-none text-muted fw-bold smaller-text"> 老人長照機構 &copy; <?= "關心長照，健健康康" ?> </a>
 					</div>
 				</div>
 			</div>
