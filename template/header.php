@@ -35,7 +35,7 @@
 
         <!--/.navbar-collapse -->
         <div class="collapse navbar-collapse" id="topNav">
-          <ul class="nav navbar-nav">
+          <ul class="nav navbar-nav">1
             <?php if(isset($_SESSION['member']['member_type']) && $_SESSION['member']['member_type'] == 3): ?>
               <li class="nav-item"><a class="nav-link" href="manage_system.php"><span class="fa fa-th-list"></span> 管理系統</a></li>
 
