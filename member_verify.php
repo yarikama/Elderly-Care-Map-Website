@@ -1,7 +1,7 @@
 <?php
 	session_start();
 	if(!isset($_POST['member_submit'])){
-		echo "Something wrong! Check again!";
+		echo "發生錯誤！";
 		exit;
 	}
 	require_once "./functions/database_functions.php";
@@ -33,9 +33,9 @@
 	if(isset($conn)) {mysqli_close($conn);}
 	$_SESSION['member'] = $row;
 
-	if(isset($_SESSION['member']['member_type']) && $_SESSION['member']['member_type'] == 3):
+	if(isset($_SESSION['member']['member_type']) && $_SESSION['member']['member_type'] == 2):
 		header("Location: manage_system.php");
 	elseif(isset($_SESSION['member']) && $_SESSION['member'] == true):
-		header("Location: books.php");
+		header("Location: index.php");
 	endif;		
 ?>
