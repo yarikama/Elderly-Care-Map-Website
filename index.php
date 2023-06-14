@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html>
-<?php require_once "./template/header.php";?>
+
 <head>
 	<title>Long term care</title>
 	<meta charset="utf-8" />
