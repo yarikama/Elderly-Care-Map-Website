@@ -3,7 +3,7 @@ session_start();
 if(isset($_SESSION['member']) && $_SESSION['member'] == true){
 	header('location:member_book.php');
 }
-	$title = "Member Panel";
+	$title = "會員註冊";
 	require_once "./template/header.php";
 ?>
 
@@ -69,7 +69,7 @@ if(isset($_SESSION['member']) && $_SESSION['member'] == true){
 							<input type="submit" name="member_submit" class="btn btn-primary rounded-0">
 						</div>
 						<div class="mb-3">
-							<p>已經有EMO帳號了？ <a href="member_login.php">從這登入</a></p>
+							<p>已經有長照帳號了？ <a href="member_login.php">從這登入</a></p>
 						</div>
 					</form>
 				</div>

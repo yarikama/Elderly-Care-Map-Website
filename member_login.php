@@ -1,7 +1,7 @@
 <?php
 session_start();
 if(isset($_SESSION['member']) && $_SESSION['member'] == true){
-	header('location:member_book.php');
+	header('location:index.php');
 }
 	$title = "會員登入";
 	require_once "./template/header.php";

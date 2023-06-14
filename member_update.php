@@ -3,7 +3,7 @@ session_start();
 
 if (isset($_SESSION['member']) && $_SESSION['member'] == true) {
     // connect to database
-    require_once "./functions/database_functions.php";
+    require_once "./function/database_function.php";
     $conn = db_connect();
 
     // Check if the form was submitted

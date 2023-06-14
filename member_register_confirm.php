@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once "./functions/database_functions.php";
+require_once "./function/database_function.php";
 
 if (isset($_POST['member_submit'])) {
 
@@ -34,7 +34,7 @@ if (isset($_POST['member_submit'])) {
         }
 
         // Prepare the SQL statement
-        $sql = "INSERT INTO `member` (member_email, member_password, member_Fname, member_Lname, member_gender, member_phone, member_address, member_birthday, member_type) VALUES ('{$member_email}', '{$member_password}', '{$member_Fname}', '{$member_Lname}', '{$member_gender}', '{$member_phone}', '{$member_address}', '{$member_birthday}', '{$member_type}')";
+        $sql = "INSERT INTO `member` (member_email, member_password, member_name, member_gender, member_phone, member_address, member_birthday, member_type) VALUES ('{$member_email}', '{$member_password}', '{$member_name}', '{$member_gender}', '{$member_phone}', '{$member_address}', '{$member_birthday}', '{$member_type}')";
 
         // Prepare statement
         $stmt = $conn->prepare($sql);
@@ -50,14 +50,6 @@ if (isset($_POST['member_submit'])) {
             $member_ID = $row['member_ID'];
             if(!$result1){
                 echo "select value false!" . mysqli_error($conn);
-                exit;
-            }
-            echo "memberid=".$member_ID."<br>";
-            $query = "INSERT INTO `coupon_member` (coupon_ID, member_ID, coupon_num)
-            VALUES ('1', '{$member_ID}', '1')";
-            $result2 = mysqli_query($conn, $query);
-            if(!$result2){
-                echo "1__Insert value false!" . mysqli_error($conn);
                 exit;
             }
             header("Location: member_login.php"); // Redirect user to the login page
