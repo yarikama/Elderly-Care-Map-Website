@@ -3,7 +3,7 @@ session_start();
 if(isset($_SESSION['member']) && $_SESSION['member'] == true){
 	header('location:member_book.php');
 }
-	$title = "Member Panel";
+	$title = "會員登入";
 	require_once "./template/header.php";
 ?>
 <div class="row justify-content-center my-5">
