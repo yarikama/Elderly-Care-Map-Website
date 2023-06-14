@@ -66,6 +66,11 @@ CREATE TABLE
         member_name varchar(50) NOT NULL,
         member_email varchar(100) NOT NULL UNIQUE,
         member_password varchar(50) NOT NULL,
+        member_address varchar(200),
+        member_phone VARCHAR(10),
+        member_birthday smallint,
+        member_gender char(1),
+        member_type SMALLINT,
         PRIMARY KEY (member_id),
         CONSTRAINT uc_member_member_name UNIQUE (member_name)
     );

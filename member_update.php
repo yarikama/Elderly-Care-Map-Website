@@ -9,8 +9,7 @@ if (isset($_SESSION['member']) && $_SESSION['member'] == true) {
     // Check if the form was submitted
     if (isset($_POST['member_submit'])) {
         $member_email = $_POST['member_email'];
-        $member_Fname = $_POST['member_Fname'];
-        $member_Lname = $_POST['member_Lname'];
+        $member_name = $_POST['member_name'];
         $member_gender = $_POST['member_gender'];
         $member_phone = $_POST['member_phone'];
         $member_address = $_POST['member_address'];
@@ -19,8 +18,7 @@ if (isset($_SESSION['member']) && $_SESSION['member'] == true) {
         // Prepare the SQL statement
         $sql = "UPDATE `member` SET 
             `member_email` = '{$_SESSION['member']['member_email']}',
-            `member_Fname` = '{$_SESSION['member']['member_Fname']}',
-            `member_Lname` = '{$_SESSION['member']['member_Lname']}',
+            `member_name` = '{$_SESSION['member']['member_name']}',
             `member_gender` = '{$_SESSION['member']['member_gender']}',
             `member_phone` = '{$_SESSION['member']['member_phone']}',
             `member_address` = '{$_SESSION['member']['member_address']}',
@@ -31,13 +29,9 @@ if (isset($_SESSION['member']) && $_SESSION['member'] == true) {
             $_SESSION['member']['member_email'] = $member_email;
             $sql .= ", `member_email` = '$member_email'";
         }
-        if (!empty($member_Fname)) {
-            $_SESSION['member']['member_Fname'] = $member_Fname;
-            $sql .= ", `member_Fname` = '$member_Fname'";
-        }
-        if (!empty($member_Lname)) {
-            $_SESSION['member']['member_Lname'] = $member_Lname;
-            $sql .= ", `member_Lname` = '$member_Lname'";
+        if (!empty($member_name)) {
+            $_SESSION['member']['member_name'] = $member_name;
+            $sql .= ", `member_name` = '$member_name'";
         }
         if (!empty($member_gender)) {
             $_SESSION['member']['member_gender'] = $member_gender;
