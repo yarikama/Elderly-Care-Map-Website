@@ -43,12 +43,8 @@ if(isset($_SESSION['member']) && $_SESSION['member'] == true){
                             <input type="password" name="member_pass_confirm" class="form-control rounded-0" required>
                         </div>
                         <div class="mb-3">
-							<label for="member_Fname" class="control-label ">名字</label>
-							<input type="text" name="member_Fname" class="form-control rounded-0" required>
-						</div>
-                        <div class="mb-3">
-							<label for="member_Lname" class="control-label ">姓氏</label>
-							<input type="text" name="member_Lname" class="form-control rounded-0" required>
+							<label for="member_name" class="control-label ">名字</label>
+							<input type="text" name="member_name" class="form-control rounded-0" required>
 						</div>
                         <div class="mb-3">
 							<label for="member_gender" class="control-label ">性別</label>

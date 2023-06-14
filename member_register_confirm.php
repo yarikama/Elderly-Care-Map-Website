@@ -8,8 +8,7 @@ if (isset($_POST['member_submit'])) {
     $member_email = $_POST['member_email'];
     $member_password = $_POST['member_password'];
     $member_pass_confirm = $_POST['member_pass_confirm'];
-    $member_Fname = $_POST['member_Fname'];
-    $member_Lname = $_POST['member_Lname'];
+    $member_name = $_POST['member_name'];
     $member_gender = $_POST['member_gender'];
     $member_phone = $_POST['member_phone'];
     $member_address = $_POST['member_address'];

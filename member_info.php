@@ -29,8 +29,7 @@ require_once "./template/header.php";
                         <?php
                         $attributes = [
                             'member_email' => '我的電子郵件',
-                            'member_Fname' => '我的名字',
-                            'member_Lname' => '我的姓氏',
+                            'member_name' => '我的名字',
                             'member_gender' => '我的性別',
                             'member_phone' => '我的電話號碼',
                             'member_address' => '我的地址',
