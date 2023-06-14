@@ -26,6 +26,23 @@
   $title = $row['ins_name'];
   require "./template/header.php";
 ?>
+<style>
+  .table {
+    table-layout: fixed;
+  }
+
+  .table td {
+    white-space: normal;
+    overflow: visible;
+  }
+
+  .no-border td{
+    border: none; /* 移除边框线 */
+  }
+  .no-border th{
+    border: none; /* 移除边框线 */
+  }
+</style>
       <!-- Example row of columns -->
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
@@ -47,43 +64,38 @@
                       <input type="hidden" name="ins_num" value="<?php echo $ins_num;?>">
                     <tr>
                       <th style="width: 80px;">地址</th>
-                      <td><?php echo $row['addr']; ?></td>
-                      <td></td>
+                      <td  colspan="6"><?php echo $row['addr']; ?></td>
                     </tr>
                     <tr>
                       <th>負責人</th>
-                      <td><?php echo $row['manager']; ?></td>
-                      <td></td>
+                      <td  colspan="6"><?php echo $row['manager']; ?></td>
                     </tr>
                     <tr>
                       <th>電話</th>
-                      <td><?php echo $row['phone']; ?></td>
-                      <td></td>
+                      <td  colspan="6"><?php echo $row['phone']; ?></td>
                     </tr>
                     <tr>
                     <th>網站</th>
-                    <td><a href="<?php echo $row['website']; ?>"><?php echo $row['website']; ?></a></td>
-                    <td></td>
+                    <td  colspan="6"><a href="<?php echo $row['website']; ?>"><?php echo $row['website']; ?></a></td>
                     </tr>
-                      <!-- 平裝+精裝 -->
-                      <tr>
-                        <th>項目</th>
-                        <td>安養</td>
-                        <td>養護</td>
-                        <td>失智</td>
-                        <td>長照</td>
-                        <td>總床位數</td>
-                        <td>總收容人數</td>
-                      </tr>
-                      <tr>
-                        <th>床位數</th>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                      </tr>
+                    <tr  class="no-border">
+                      <th>項目</th>
+                      <td><b>安養</b></td>
+                      <td><b>養護</b></td>
+                      <td><b>失智</b></td>
+                      <td><b>長照</b></td>
+                      <td style="color: red;"><b>總床位數</b></td>
+                      <td style="color: red;"><b>總收容人數</b></td>
+                    </tr>
+                    <tr>
+                      <th>床位數</th>
+                      <td><?php echo $row['caring_num']?></td>
+                      <td><?php echo $row['nurse_num']?></td>
+                      <td><?php echo $row['dem_num']?></td>
+                      <td><?php echo $row['long_caring_num']?></td>
+                      <td style="color: red;"><?php echo $row['housing_num']?></td>
+                      <td style="color: red;"><?php echo $row['providing_num']?></td>
+                    </tr>
                       
 
                     <?php
@@ -92,7 +104,7 @@
                   </table>
                   
                     <div class="text-center">
-                      <input type="submit" value="加入購物車" name="cart" class="btn btn-primary rounded-0">
+                      <input type="submit" value="加入喜愛列表" name="good_list" class="btn btn-primary rounded-0">
                     </div>
                   </form>
               </div>
