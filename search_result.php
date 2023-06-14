@@ -7,34 +7,40 @@
   
   $city = $_SESSION['city'];
   if (isset($_POST['dist'])) $dist = $_POST['dist'];
-  $sql = "SELECT distinct institution.ins_num, ins_name
-  FROM type_func, institution, ins_address 
+  $sql = "SELECT distinct institution.ins_num, ins_name, caring_num, nurse_num, dem_num, long_caring_num
+  FROM type_func, institution, ins_address, ins_capacity
   WHERE institution.ins_num = type_func.ins_num AND institution.ins_num = ins_address.ins_num 
+  AND institution.ins_num = ins_capacity.ins_num
   AND city = '$city' ";
   
   $conditions = array();
   $func_name = array();
+  $func_num = array();
   if($_POST['dist'] != "全區域"){
     $sql .= " AND dist = '$dist' ";
   }
   if (isset($_POST['長照'])){
     $conditions[] = "func_name = '長照'";
     $func_name[] = "長照";
+    $func_num[] = "long_caring_num";
   }
   if (isset($_POST['養護'])){
     $conditions[] = "func_name = '養護'";
     $func_name[] = "養護";
+    $func_num[] = "nurse_num";
   }
   if (isset($_POST['失智'])){
     $conditions[] = "func_name = '失智'";
     $func_name[] = "失智";
+    $func_num[] = "dem_num";
   }
   if (isset($_POST['安養'])){
     $conditions[] = "func_name = '安養'";
     $func_name[] = "安養";
+    $func_num[] = "caring_num";
   }
   if (!empty($conditions)) {
-    $sql .= " AND (" . implode(" OR ", $conditions) . ");";
+    $sql .= " AND (" . implode(" OR ", $conditions) . ") ORDER BY ".implode(", ", $func_num).";";
   }
   $result = mysqli_query($conn, $sql);
   

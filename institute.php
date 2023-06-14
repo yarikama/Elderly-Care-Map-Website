@@ -12,14 +12,18 @@
   AND institution.ins_num = ins_capacity.ins_num
   AND institution.ins_num = ins_info.ins_num;";
   $result = mysqli_query($conn, $query);
-  if(!$result){
+
+  $query2 = "SELECT func_name FROM type_func WHERE ins_num = '$ins_num';";
+  $result2 = mysqli_query($conn, $query2);
+  if(!$result or !$result2){
     echo "Can't retrieve data " . mysqli_error($conn);
     exit;
   }
 
   $row = mysqli_fetch_assoc($result);
-  if(!$row){
-    echo "Empty book";
+  $row2 = mysqli_fetch_assoc($result2);
+  if(!$row or !$row2){
+    echo "Empty!";
     exit;
   }
 
@@ -78,6 +82,15 @@
                     <th>網站</th>
                     <td  colspan="6"><a href="<?php echo $row['website']; ?>"><?php echo $row['website']; ?></a></td>
                     </tr>
+                    <tr>
+                    <th>服務項目</th>
+                    <?php 
+                    while($row2 = mysqli_fetch_assoc($result2)){
+                      echo "<td colspan=\"6\">".$row2['func_name']."</td>";
+                      }
+                    ?>
+                    </tr>
+
                     <tr  class="no-border">
                       <th>項目</th>
                       <td><b>安養</b></td>
