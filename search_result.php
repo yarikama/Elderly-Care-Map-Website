@@ -2,7 +2,7 @@
   session_start();
   $count = 0;
   // connecto database
-  require_once "./functions/database_functions.php";
+  require_once "./function/database_function.php";
   $conn = db_connect();
   
   $city = $_SESSION['city'];

@@ -1,5 +1,6 @@
 <?php
   session_start();
+  require_once "./function/database_function.php";
   $count = 0;
   // connecto database
   $title = "Long-term care institutions";
@@ -44,9 +45,9 @@
         while($row = mysqli_fetch_assoc($result)){
         echo "<option value=\"".$row['city']."\">".$row['city']."</option>";
         }
-        
         ?>            
       </select>
+      
       <label for="pub_year" class="control-label ">&nbsp&nbsp所在區域&nbsp&nbsp;</label>
       <input type="text" name="all" class="form-control rounded-0" value="全區域" disabled>
     </div>
