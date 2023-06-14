@@ -63,7 +63,7 @@
       <div class="row">
         <?php while($row = mysqli_fetch_assoc($result)){ ?>
           <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 py-2 mb-2">
-      		<a href="institution.php?ins=<?php echo $row['ins_num']; ?>" class="card rounded-0 shadow book-item text-reset text-decoration-none">
+      		<a href="institute.php?insnum=<?php echo $row['ins_num']; ?>" class="card rounded-0 shadow book-item text-reset text-decoration-none">
             <div class="card-body">
               <div class="card-title fw-bolder h5 text-center"><?= $row['ins_name'] ?></div>
             </div>
