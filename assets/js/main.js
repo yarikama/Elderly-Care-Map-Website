@@ -93,11 +93,31 @@ function getTypingAddress(){
     sendAddress('typeAddress', $('#address').val());
 }
 
+function sendAddress(method, address){
+    var dataJSON= {};
+    dataJSON[method]= address;
+    $.ajax({
+        url: 'select.php',
+        data: JSON.stringify(dataJSON),
+        type: "POST",
+        dataType: "json",
+        contentType: "application/json;charset=utf-8",
+        success: function(resp){
+            searchMap(address);
+        },
+        error: function(xhr, ajaxOptions, thrownError){
+            alert(xhr.status);
+            alert(thrownError);
+        }
+    });
+}
+
+
 // send data to php
 // data type:
 //      by select county and districk   => {"selectArea":"新北市汐止區"}
 //      by typing address               => {"typeAddress":"陽明交通大學"}
-function sendAddress(method, address){
+/*function sendAddress(method, address){
     var dataJSON= {};
     dataJSON[method]= address;
     $.ajax({
@@ -112,6 +132,17 @@ function sendAddress(method, address){
             console.log(xhr.status);
             console.log(ajaxOptions);
             console.log(thrownError);
+        }
+    });
+}*/
+
+function searchMap(address){
+    geocoder.geocode({
+        'address': address
+    }, function(results, status){
+        if(status == google.maps.GeocoderStatus.OK){
+            var location = results[0].geometry.location;
+            map.setCenter(location);
         }
     });
 }
