@@ -1,4 +1,3 @@
-      	<hr>
 
       	<footer class="fixed-bottom bg-light bg-gradient border py-3 px-2">
 			<div class="container">

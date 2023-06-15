@@ -53,7 +53,7 @@ function initMap() {
             position: myLatLng,
             map: map,
             title: '你的位置',
-            icon: imageRoute[2]
+            icon: 'images/originLocation.png'
         });
         markers.push(Center);
     })

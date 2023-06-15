@@ -4,7 +4,7 @@ $title = "長照地圖";
 require_once "./template/header.php";
 ?>
 
-<div style="width: 300px; padding: 20px; box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1); border-radius: 8px; position: absolute; left:50px; top: 50px; z-index: 100; background-color: gray;">
+<div style="width: 300px; padding: 20px; box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1); border-radius: 8px; position: fixed; left:50px; top: 50px; z-index: 100; background-color: gray;">
     <div style="display: flex; justify-content: space-between; align-items: center;">
         <input type="address" id="address" spellcheck="false" placeholder="請輸入地址" autocomplete="off" style="width: 80%; padding: 10px; border: none; border-bottom: 1px solid #ccc; font-size: 16px;">
         <button id="searchBtn" style="background-color: #008CBA; color: white; padding: 10px 24px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px;">搜索</button>
@@ -47,10 +47,22 @@ require_once "./template/header.php";
       border-radius: 4px;
       box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
     }
+
+    body, html{
+      position: relative;
+      height: 100%;
+      width: 100%;
+    }
+
+    #main{
+      position: relative;
+      height: 85%;
+      width: 100%;
+    }
   </style>
 
 <!-- Google Maps Integration -->
-<div id="map" style="height: 800px;"></div>
+<div id="map" style="height: 100%; width:100%"></div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script async defer
 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVRZ4YS4Xzl2lAV6kv5tFdFWs7T3GAYiU&callback=initMap">
