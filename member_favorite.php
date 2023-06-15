@@ -23,7 +23,7 @@
 <div><br></div>
 <nav aria-label="breadcrumb" style="display: flex; justify-content: center;">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="member_info.php" class="text-decoration-none text-muted fw-light">會員資訊</a></li>
+        <li class="breadcrumb-item"><a href="member_info.php" class="text-decoration-none text-muted fw-light">個人資料</a></li>
         <li class="breadcrumb-item"><a href="member_favorite.php" class="text-decoration-none text-muted fw-light">喜愛列表</a></li>
     </ol>
 </nav>
