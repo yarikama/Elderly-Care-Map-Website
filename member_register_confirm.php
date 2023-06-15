@@ -44,10 +44,10 @@ if (isset($_POST['member_submit'])) {
             $_SESSION['success_message'] = "成功註冊";
 
             $conn = db_connect();
-            $sql = "SELECT * FROM `member` ORDER BY member_ID DESC LIMIT 1;";
+            $sql = "SELECT * FROM `member` ORDER BY member_id DESC LIMIT 1;";
             $result1 = mysqli_query($conn, $sql);
             $row = mysqli_fetch_assoc($result1);
-            $member_ID = $row['member_ID'];
+            $member_id = $row['member_id'];
             if(!$result1){
                 echo "select value false!" . mysqli_error($conn);
                 exit;

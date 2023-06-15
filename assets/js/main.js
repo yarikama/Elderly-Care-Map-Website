@@ -5,8 +5,6 @@ var Locate = {lat: 25.04, lng: 121.512};
 const imageRoute= ["images/redpin.png","images/yellowpin.png","images/greenpin.png"];
 const highLevel= 500, lowLevel= 100;
 
-$('#searchBtn').click(getTypingAddress);
-
 function getPosition(){
     if(navigator.geolocation){
         return new Promise((resolve, reject) => {
@@ -87,6 +85,7 @@ function initMap() {
         map.setZoom(newZoom);
       });
 }
+<<<<<<< HEAD
 
 
 function getTypingAddress(){
@@ -240,3 +239,5 @@ function geocodeAddress() {
 //         });
 //     });
 // })
+=======
+>>>>>>> 0996d13f45a5596b665213d4cce43db521e60caa
