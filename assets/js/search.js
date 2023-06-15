@@ -97,7 +97,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         // 重新設定地圖的中心
         map.setCenter(new google.maps.LatLng(selectedDistrict.latitude, selectedDistrict.longitude));
-
+        
         fetch(baseURL + '?action=getCenters&city=' + selectedCounty + '&dist=' + selectedDistrict.name)
         .then(response => response.json())
         .then(data => {
@@ -168,12 +168,17 @@ function geocodeAddress() {
     let address = document.getElementById('address').value;
     let geocoder = new google.maps.Geocoder();
 
+    if(address==''){
+        alert('請輸入地址');
+        return
+    }
     geocoder.geocode({'address': address}, function(results, status) {
         if (status === 'OK') {
             let result = results[0];
             let position = result.geometry.location;
             map.setCenter(position);
 
+            console.log(result)
             // 新增一個地圖標記
             let marker = new google.maps.Marker({
                 position: position,
@@ -187,15 +192,18 @@ function geocodeAddress() {
                 let component = results[0].address_components[i];
                 if (component.types.includes('administrative_area_level_1')) {
                     city = component.short_name;
+                } else if (component.types.includes('administrative_area_level_2')) {
+                    city = component.short_name;
                 } else if (component.types.includes('administrative_area_level_3')) {
                     dist = component.short_name;
                 }
             }
+            if(city[0]==='台')
+                city= city.replace('台', '臺');
 
             // 打印縣市和鄉鎮市區信息
             console.log('縣市:', city);
             console.log('鄉鎮市區:', dist);
-
             // 根據選中的縣市和區縣獲取長照中心
             fetch(baseURL + '?action=getCenters&city=' + city + '&dist=' + dist)
             .then(response => response.json())
@@ -211,7 +219,8 @@ function geocodeAddress() {
                     let position = new google.maps.LatLng(center.latitude, center.longitude);
                     let marker = new google.maps.Marker({
                         position: position,
-                        map: map
+                        map: map,
+                        icon: imageRoute[0]
                     });
                     let content = '<div class="info-window">' +
                     '<h2 class="info-title" style="border-bottom: 1px solid #ccc;">' + center.ins_name + '</h2>' +
