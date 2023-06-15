@@ -61,6 +61,7 @@ function getDistricts($conn, $city) {
 
     echo json_encode($data);
 }
+
 function getCenters($conn, $city, $district) {
     $query = "SELECT i.*, a.*, ic.*, info.* FROM institution i 
               JOIN ins_address a ON i.ins_num = a.ins_num 
