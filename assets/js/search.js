@@ -30,11 +30,61 @@ document.addEventListener("DOMContentLoaded", function() {
         fetch(baseURL + '?action=getDistricts&city=' + selectedCity)
         .then(response => response.json())
         .then(data => {
-            data.forEach(district => {
+            data.districts.forEach(district => {
                 let option = document.createElement('option');
                 option.text = district.dist;
                 option.value = JSON.stringify({ name: district.dist, latitude: district.latitude, longitude: district.longitude });
                 districtSelect.add(option);
+            });
+
+            // 移動地圖中心到選中的縣市
+            if (data.districts.length > 0) {
+                let cityCenter = new google.maps.LatLng(data.districts[0].latitude, data.districts[0].longitude);
+                map.setCenter(cityCenter);
+            }
+
+            if (window.markers) {
+                for (let i = 0; i < window.markers.length; i++) {
+                    window.markers[i].setMap(null);
+                }
+            }
+
+            window.markers = data.careCenters.map(center => {
+                let position = new google.maps.LatLng(center.latitude, center.longitude);
+                let marker = new google.maps.Marker({
+                    position: position,
+                    map: map,
+                    icon: 'images/redpin.png'
+                });
+    
+                // 原有的資訊視窗和點擊事件綁定代碼
+                let content = '<div class="info-window">' +
+                '<h2 class="info-title" style="border-bottom: 1px solid #ccc;">' + center.ins_name + '</h2>' +
+                '<div style="display: flex; align-items: center; margin-bottom: 10px;">' +
+                '<i class="fas fa-info-circle" style="font-size: 20px; margin-right: 10px;"></i>' +
+                '<h3 class="info-subtitle" style="font-size: 18px; color: orange;">資訊</h3>' +
+                '</div>' +
+                '<p class="info-details" style="font-size: 16px;">' +
+                '<strong>地址 :</strong> ' + center.addr + '<br>' +
+                '<strong>管理員 :</strong> ' + center.manager + '<br>' +
+                '<strong>電話 :</strong> ' + center.phone + '<br>' +
+                '<strong>網站 :</strong><a href="' + center.website + '">' + center.website + '</a><br>' +
+                '<div style="display: flex; align-items: center; margin-top: 10px;">' +
+                '<i class="fas fa-bed" style="font-size: 20px; margin-right: 10px;"></i>' +
+                '<h3 class="info-subtitle" style="font-size: 18px; color: orange;">床位數</h3>' +
+                '</div>' +
+                '<p class="info-details" style="font-size: 16px;">' +
+                '<strong>養護型床位 :</strong> ' + center.nurse_num + '<br>' +
+                '<strong>安養型床位 :</strong> ' + center.caring_num + '<br>' +
+                '<strong>長照型床位 :</strong> ' + center.long_caring_num + '<br>' +
+                '<strong>失智照顧型床位 :</strong> ' + center.dem_num + '<br>' +
+                '<strong>使用中床位 :</strong> ' + center.housing_num + '<br>' +
+                '<strong>提供床位 :</strong> ' + center.providing_num + '<br>' +
+                '</p>' +
+                '</div>';
+
+    
+                return marker;
             });
         })
         .catch(error => console.log(error));

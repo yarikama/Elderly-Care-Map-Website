@@ -44,8 +44,22 @@ function getDistricts($conn, $city) {
     while ($row = mysqli_fetch_assoc($result)) {
         $districts[] = $row;
     }
+    $query2 = "SELECT i.*, a.*, ic.*, info.* FROM institution i 
+              JOIN ins_address a ON i.ins_num = a.ins_num 
+              JOIN ins_capacity ic ON i.ins_num = ic.ins_num
+              JOIN ins_info info ON i.ins_num = info.ins_num
+              WHERE a.city = '$city'";
+    $result2 = mysqli_query($conn, $query2);
 
-    echo json_encode($districts);
+    $careCenters = array();
+    while ($row = mysqli_fetch_assoc($result2)) {
+        $careCenters[] = $row;
+    }
+
+    // Combine districts and care centers into one array
+    $data = array("districts" => $districts, "careCenters" => $careCenters);
+
+    echo json_encode($data);
 }
 function getCenters($conn, $city, $district) {
     $query = "SELECT i.*, a.*, ic.*, info.* FROM institution i 
