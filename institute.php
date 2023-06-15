@@ -133,7 +133,8 @@
                   </table>
                   
                     <div class="text-center">
-                      <input type="submit" value="加入喜愛列表" name="good_list" class="btn btn-primary rounded-0">
+                    <button type="submit" name="good_list" class="btn btn-primary">加入喜愛列表</button>
+                    <button id="searchBtn" class="btn btn-primary">點我搜尋</button>
                     </div>
                   </form>
               </div>
