@@ -68,8 +68,8 @@ CREATE TABLE
         member_password varchar(50) NOT NULL,
         member_address varchar(200),
         member_phone VARCHAR(10),
-        member_birthday smallint,
-        member_gender char(1),
+        member_birthday DATE,
+        member_gender char(5),
         member_type SMALLINT,
         PRIMARY KEY (member_id),
         CONSTRAINT uc_member_member_name UNIQUE (member_name)

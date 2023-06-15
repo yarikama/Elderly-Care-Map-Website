@@ -79,6 +79,13 @@ function initMap() {
         });
     })
     .catch(error => errorCallback(error))
+    window.addEventListener('resize', function() {
+        // Calculate the new zoom level based on the initial zoom and the window dimensions
+        var newZoom = Math.round(initialZoom * (window.innerWidth / initialWindowWidth));
+    
+        // Set the new zoom level on the map
+        map.setZoom(newZoom);
+      });
 }
 
 
