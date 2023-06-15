@@ -32,12 +32,10 @@ function initMap() {
     var geocoder = new google.maps.Geocoder();
     markers = [];
 
-    // set current position
     getPosition()
     .then((position) => {
         var myLatLng = {lat: position.coords.latitude, lng: position.coords.longitude};
 
-        // set current position to the center of map
         map = new google.maps.Map(document.getElementById('map'), {
             center: myLatLng,
             zoom: 15,
@@ -58,30 +56,10 @@ function initMap() {
             icon: imageRoute[2]
         });
         markers.push(Center);
-
-        // Add event listener for district select change
-        districtSelect.addEventListener('change', function() {
-            // 清除原有的标记
-            for (let i = 0; i < markers.length; i++) {
-                markers[i].setMap(null);
-            }
-            markers = [];
-            
-            // 根據選中的縣市和區縣獲取長照中心
-            let selectedCounty = countySelect.value;
-            let selectedDistrict = this.value;
-            fetch(baseURL + '?action=getCenters&county=' + selectedCounty + '&district=' + selectedDistrict)
-            .then(response => response.json())
-            .then(data => {
-            }).catch(error => console.log(error));
-        });
     })
     .catch(error => errorCallback(error))
     window.addEventListener('resize', function() {
-        // Calculate the new zoom level based on the initial zoom and the window dimensions
         var newZoom = Math.round(initialZoom * (window.innerWidth / initialWindowWidth));
-    
-        // Set the new zoom level on the map
         map.setZoom(newZoom);
       });
 }
