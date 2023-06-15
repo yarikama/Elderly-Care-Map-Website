@@ -4,18 +4,18 @@ require_once 'database_function.php';
 $conn = db_connect();
 
 $action = $_GET['action'];
-$county = $_GET['county'];
+$city = $_GET['city']; // 更改 county 為 city
 
 switch ($action) {
     case 'getCounties':
         getCounties($conn);
         break;
     case 'getDistricts':
-        getDistricts($conn, $county);
+        getDistricts($conn, $city);
         break;
     case 'getCenters':
-        $district = $_GET['district'];
-        getCenters($conn, $county, $district);
+        $district = $_GET['dist'];
+        getCenters($conn, $city, $district);
         break;
     default:
         http_response_code(404);
@@ -24,8 +24,7 @@ switch ($action) {
 
 
 function getCounties($conn) {
-    echo "getCounties";
-    $query = "SELECT DISTINCT city FROM ins_address";
+    $query = "SELECT DISTINCT city FROM Taiwan_city_dist";
     $result = mysqli_query($conn, $query);
 
     $counties = array();
@@ -36,23 +35,26 @@ function getCounties($conn) {
     echo json_encode($counties);
 }
 
-function getDistricts($conn, $county) {
-    $county = mysqli_real_escape_string($conn, $county); // 避免 SQL Injection
-    $query = "SELECT DISTINCT dist FROM ins_address WHERE city = '$county'";
+function getDistricts($conn, $city) {
+    $city = mysqli_real_escape_string($conn, $city); // 避免 SQL Injection
+    $query = "SELECT dist, latitude, longitude FROM Taiwan_city_dist WHERE city = '$city'";
     $result = mysqli_query($conn, $query);
 
     $districts = array();
     while ($row = mysqli_fetch_assoc($result)) {
-        $districts[] = $row['dist'];
+        $districts[] = $row;
     }
 
     echo json_encode($districts);
 }
-
-function getCenters($conn, $county, $district) {
-    $query = "SELECT * FROM ins_address WHERE city = ? AND dist = ?";
+function getCenters($conn, $city, $district) {
+    $query = "SELECT i.*, a.*, ic.*, info.* FROM institution i 
+              JOIN ins_address a ON i.ins_num = a.ins_num 
+              JOIN ins_capacity ic ON i.ins_num = ic.ins_num
+              JOIN ins_info info ON i.ins_num = info.ins_num
+              WHERE a.city = ? AND a.dist = ?";
     $stmt = $conn->prepare($query);
-    $stmt->bind_param("ss", $county, $district);
+    $stmt->bind_param("ss", $city, $district);
     $stmt->execute();
     $result = $stmt->get_result();
     $centers = array();
@@ -61,3 +63,4 @@ function getCenters($conn, $county, $district) {
     }
     echo json_encode($centers);
 }
+

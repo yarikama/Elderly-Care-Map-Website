@@ -60,7 +60,7 @@
       <!-- Example row of columns -->
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="institutes.php" class="text-decoration-none text-muted fw-light">總覽</a></li>
+          <li class="breadcrumb-item"><a href="member_favorite.php" class="text-decoration-none text-muted fw-light">喜愛列表總覽</a></li>
           <li class="breadcrumb-item active" aria-current="page"><?php echo $row['ins_name']; ?></li>
         </ol>
       </nav>
@@ -131,10 +131,9 @@
                       if(isset($conn)) {mysqli_close($conn); }
                     ?>
                   </table>
-                  
-                    <div class="text-center">
-                      <input type="submit" value="加入喜愛列表" name="good_list" class="btn btn-primary rounded-0">
-                    </div>
+                  <div class="btn-group btn-group-sm" style="display: flex; justify-content: center;">
+                    <a href="member_favorite_delete.php?insnum=<?php echo $ins_num; ?>" class="btn btn-sm rounded-0 btn-danger" title="Delete" onclick="if(confirm('確定要將此機構移出喜愛列表嗎?') === false) event.preventDefault()"><i class="fa fa-trash"></i></a>
+                  </div>
                   </form>
               </div>
             </div>

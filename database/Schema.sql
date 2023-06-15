@@ -68,8 +68,8 @@ CREATE TABLE
         member_password varchar(50) NOT NULL,
         member_address varchar(200),
         member_phone VARCHAR(10),
-        member_birthday smallint,
-        member_gender char(1),
+        member_birthday DATE,
+        member_gender char(5),
         member_type SMALLINT,
         PRIMARY KEY (member_id),
         CONSTRAINT uc_member_member_name UNIQUE (member_name)
@@ -80,6 +80,16 @@ CREATE TABLE
         member_id int NOT NULL,
         ins_num int NOT NULL,
         PRIMARY KEY (member_id, ins_num)
+    );
+
+CREATE TABLE
+    Taiwan_city_dist (
+        dist_num int AUTO_INCREMENT,
+        city varchar(14) NOT NULL,
+        dist VARCHAR(14) NOT NULL,
+        longitude FLOAT NOT NULL,
+        latitude FLOAT NOT NULL,
+        PRIMARY KEY (dist_num)
     );
 
 CREATE TABLE
@@ -106,6 +116,15 @@ CREATE TABLE
         total_toll int,
         latitude float,
         longitude float
+    );
+
+CREATE TABLE
+    tmp2 (
+        addr varchar(20),
+        ma3 char(3),
+        longitude FLOAT,
+        latitude FLOAT,
+        TGOS_URL VARCHAR(250)
     );
 
 ALTER TABLE ins_address

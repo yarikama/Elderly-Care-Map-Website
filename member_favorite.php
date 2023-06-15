@@ -1,28 +1,34 @@
 <?php
 	session_start();
 	// require_once "./functions/admin.php";
-	$title = "Order Information";
+	$title = "Member favorite";
 	require_once "./template/header.php";
-	require_once "./functions/database_functions.php";
+	require_once "./function/database_function.php";
     
-    $memberid = $_SESSION['member']['member_ID'];
+    $memberid = $_SESSION['member']['member_id'];
 
 	$conn = db_connect();
-	$sql = "SELECT 
-	FROM member_favorite, institution
-    WHERE member_ID = '$memberid' AND institution.ins_num = member_favorite.ins_num
+	$sql = "SELECT institution.ins_num, ins_name, phone, housing_num, addr
+	FROM member_favorite, institution, ins_address, ins_capacity, ins_info
+    WHERE member_id = '$memberid' AND institution.ins_num = member_favorite.ins_num
+	AND institution.ins_num = ins_address.ins_num AND institution.ins_num = ins_capacity.ins_num
+	AND institution.ins_num = ins_info.ins_num
     ;";
     $result = mysqli_query($conn, $sql);
+    if(!$result){
+        echo "Can't retrieve data " . mysqli_error($conn);
+        exit;
+      }
 ?>
 <div><br></div>
 <nav aria-label="breadcrumb" style="display: flex; justify-content: center;">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="member_info.php" class="text-decoration-none text-muted fw-light">會員資訊</a></li>
-        <li class="breadcrumb-item"><a href="user_view_order.php" class="text-decoration-none text-muted fw-light">訂單資訊</a></li>
-        <li class="breadcrumb-item"><a href="user_view_coupon.php" class="text-decoration-none text-muted fw-light">查看優惠券</a></li>
+        <li class="breadcrumb-item"><a href="member_favorite.php" class="text-decoration-none text-muted fw-light">喜愛列表</a></li>
     </ol>
 </nav>
-<h4 class="fw-bolder text-center">機構資訊</h4>
+<div><br></div>
+<h4 class="fw-bolder text-center">機構喜愛列表</h4>
 <center>
 <hr class="bg-warning" style="width:5em;height:3px;opacity:1">
 </center>
@@ -32,64 +38,31 @@
 		<div class="container-fluid">
 			<table class="table table-striped table-bordered text-left" >
 			<colgroup>
-				<col width="100px">
 				<col width="200px">
 				<col width="100px">
 				<col width="100px">
-				<col width="100px">
-				<col width="100px">
-				<col width="100px">
-				<col width="100px">
-				<col width="100px">
+				<col width="200px">
+				<col width="80px">
 			</colgroup>
 				<thead>
 				<tr>
-					<th>訂單編號</th>
-					<th>訂單日期</th>
-					<th>付款方式</th>
-					<th>運送方式</th>
-					<th>總價</th>
-					<th>發票方式</th>
-					<th>優惠券</th>
-					<th>統編</th>
-					<th>取貨地點</th>
+					<th>名稱</th>
+					<th>電話</th>
+					<th>總床位</th>
+					<th>地址</th>
 				</tr>
 				</thead>
 				<tbody>
 				<?php while($row = mysqli_fetch_assoc($result)){ ?>
 				<tr>
-					<td class="px-2 py-1 align-middle"><?php echo $row['order_ID']; ?></td>
-					<td class="px-2 py-1 align-middle"><?php echo $row['order_date']; ?></td>
-					<td class="px-2 py-1 align-middle"><?php echo $row['payment_method']; ?></td>
-					<td class="px-2 py-1 align-middle">
-						<?php 
-						$disttype = $row['dist_type'];
-						$conn = db_connect();
-						$sql = "SELECT * FROM dist_list where dist_type = '$disttype';";
-						$result2 = mysqli_query($conn, $sql);
-						$row2 = mysqli_fetch_assoc($result2);
-						echo $row2['dist_name']; 
-						?>
-					</td>
-
-					<td class="px-2 py-1 align-middle"><?php echo $row['total_price']; ?></td>
-					<td class="px-2 py-1 align-middle"><?php echo $row['invoice_type']; ?></td>
-					<td class="px-2 py-1 align-middle">
-						<?php 
-						$couponid = $row['coupon_ID'];
-						$conn = db_connect();
-						$sql = "SELECT * FROM coupon where coupon_ID = '$couponid';";
-						$result3 = mysqli_query($conn, $sql);
-						$row3 = mysqli_fetch_assoc($result3);
-						echo $row3['coupon_name']; 
-						?>
-					</td>
-					<td class="px-2 py-1 align-middle"><?php echo $row['uniform_number']; ?></td>
-					<td class="px-2 py-1 align-middle"><?php echo $row['dist_loc']; ?></td>
+					<td class="px-2 py-1 align-middle"><?php echo $row['ins_name']; ?></td>
+					<td class="px-2 py-1 align-middle"><?php echo $row['phone']; ?></td>
+					<td class="px-2 py-1 align-middle"><?php echo $row['housing_num']; ?></td>
+					<td class="px-2 py-1 align-middle"><?php echo $row['addr']; ?></td>
 					<td class="px-2 py-1 align-middle text-center">
 						<div class="btn-group btn-group-sm">
-							<a href="user_order_detail.php?orderid=<?php echo $row['order_ID']; ?>" class="btn btn-sm rounded-0 btn-primary" title="Edit"><i class="fa fa-align-left"></i></a>
-							<a href="user_order_delete.php?orderid=<?php echo $row['order_ID']; ?>" class="btn btn-sm rounded-0 btn-danger" title="Delete" onclick="if(confirm('確定要刪除這本書的訂單嗎?') === false) event.preventDefault()"><i class="fa fa-trash"></i></a>
+							<a href="member_favorite_detail.php?insnum=<?php echo $row['ins_num']; ?>" class="btn btn-sm rounded-0 btn-primary" title="detail"><i class="fa fa-align-left"></i></a>
+							<a href="member_favorite_delete.php?insnum=<?php echo $row['ins_num']; ?>" class="btn btn-sm rounded-0 btn-danger" title="Delete" onclick="if(confirm('確定要將此機構移出喜愛列表嗎?') === false) event.preventDefault()"><i class="fa fa-trash"></i></a>
 						</div>
 					</td>
 				</tr>

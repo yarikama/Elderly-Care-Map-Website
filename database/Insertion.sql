@@ -108,3 +108,8 @@ INSERT INTO
 SELECT ins_num, orient3
 FROM tmp1
 WHERE orient3 IS NOT NULL;
+
+INSERT INTO
+    Taiwan_city_dist (city, dist, longitude, latitude)
+    SELECT  LEFT(addr, 3), SUBSTRING(addr, 4), longitude, latitude
+    FROM tmp2;
