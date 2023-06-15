@@ -4,7 +4,7 @@ $title = "長照地圖";
 require_once "./template/header.php";
 ?>
 
-<div style="width: 300px; padding: 20px; box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1); border-radius: 8px; position: absolute; right: 40px; top: 50px; z-index: 100; background-color: gray;">
+<div style="width: 300px; padding: 20px; box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1); border-radius: 8px; position: absolute; left:50px; top: 50px; z-index: 100; background-color: gray;">
     <div style="display: flex; justify-content: space-between; align-items: center;">
         <input type="address" id="address" spellcheck="false" placeholder="請輸入地址" autocomplete="off" style="width: 80%; padding: 10px; border: none; border-bottom: 1px solid #ccc; font-size: 16px;">
         <button id="searchBtn" style="background-color: #008CBA; color: white; padding: 10px 24px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px;">搜索</button>

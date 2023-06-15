@@ -67,15 +67,31 @@ document.addEventListener("DOMContentLoaded", function() {
                 });
                 let content = '<div class="info-window">' +
                 '<h2 class="info-title" style="border-bottom: 1px solid #ccc;">' + center.ins_name + '</h2>' +
+                '<div style="display: flex; align-items: center; margin-bottom: 10px;">' +
+                '<i class="fas fa-info-circle" style="font-size: 20px; margin-right: 10px;"></i>' +
+                '<h3 class="info-subtitle" style="font-size: 18px; color: orange;">資訊</h3>' +
+                '</div>' +
                 '<p class="info-details" style="font-size: 16px;">' +
                 '<strong>地址 :</strong> ' + center.addr + '<br>' +
                 '<strong>管理員 :</strong> ' + center.manager + '<br>' +
                 '<strong>電話 :</strong> ' + center.phone + '<br>' +
-                '<strong>護理人數 :</strong> ' + center.nurse_num + '<br>' +
-                '<strong>提供人數 :</strong> ' + center.providing_num + '<br>' +
-                '網站 : <a href="' + center.website + '">' + center.website + '</a>' +
+                '<strong>網站 :</strong><a href="' + center.website + '">' + center.website + '</a><br>' +
+                '<div style="display: flex; align-items: center; margin-top: 10px;">' +
+                '<i class="fas fa-bed" style="font-size: 20px; margin-right: 10px;"></i>' +
+                '<h3 class="info-subtitle" style="font-size: 18px; color: orange;">床位數</h3>' +
+                '</div>' +
+                '<p class="info-details" style="font-size: 16px;">' +
+                '<strong>養護型床位 :</strong> ' + center.nurse_num + '<br>' +
+                '<strong>安養型床位 :</strong> ' + center.caring_num + '<br>' +
+                '<strong>長照型床位 :</strong> ' + center.long_caring_num + '<br>' +
+                '<strong>失智照顧型床位 :</strong> ' + center.dem_num + '<br>' +
+                '<strong>使用中床位 :</strong> ' + center.housing_num + '<br>' +
+                '<strong>提供床位 :</strong> ' + center.providing_num + '<br>' +
                 '</p>' +
                 '</div>';
+            
+            
+            
             
 
                 // 建立資訊視窗
