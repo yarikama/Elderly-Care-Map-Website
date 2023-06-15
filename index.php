@@ -11,10 +11,10 @@ require_once "./template/header.php";
     </div>
     <div style="display: flex; justify-content: space-between; margin-top: 20px;">
         <select name="select-profession" id="select-county" style="width: 45%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; background-color: #f8f8f8; font-size: 16px;">
-            <option value="" disabled>縣市</option>
+            <option value="">縣市</option>
         </select>
         <select name="select-superpower" id="select-district" style="width: 45%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; background-color: #f8f8f8; font-size: 16px;">
-            <option value="" disabled>鄉鎮市區</option>
+            <option value="">鄉鎮市區</option>
         </select>
     </div>
 </div>

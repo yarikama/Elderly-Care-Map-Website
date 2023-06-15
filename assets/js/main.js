@@ -5,8 +5,6 @@ var Locate = {lat: 25.04, lng: 121.512};
 const imageRoute= ["images/redpin.png","images/yellowpin.png","images/greenpin.png"];
 const highLevel= 500, lowLevel= 100;
 
-$('#searchBtn').click(getTypingAddress);
-
 function getPosition(){
     if(navigator.geolocation){
         return new Promise((resolve, reject) => {
@@ -87,28 +85,3 @@ function initMap() {
         map.setZoom(newZoom);
       });
 }
-
-
-function geocodeAddress() {
-    // 獲取用戶輸入的地址
-    let address = document.getElementById('address').value;
-
-    // 建立一個 Geocoder 物件來進行地理編碼
-    let geocoder = new google.maps.Geocoder();
-
-    geocoder.geocode({'address': address}, function(results, status) {
-        if (status === 'OK') {
-            // 如果地理編碼成功，將地圖的中心點設定為地址的地理位置
-            map.setCenter(results[0].geometry.location);
-
-            // 將標記添加到地圖上
-            new google.maps.Marker({
-                map: map,
-                position: results[0].geometry.location
-            });
-        } else {
-            alert('Geocode was not successful for the following reason: ' + status);
-        }
-    });
-}
-
