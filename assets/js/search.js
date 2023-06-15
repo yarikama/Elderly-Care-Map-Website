@@ -58,6 +58,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
             }
             // 建立新的標記並添加到地圖
+            console.log(data)
             window.markers = data.map(center => {
                 let position = new google.maps.LatLng(center.latitude, center.longitude);
                 let marker = new google.maps.Marker({
