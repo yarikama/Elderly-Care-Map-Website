@@ -50,7 +50,7 @@ require_once "./template/header.php";
   </style>
 
 <!-- Google Maps Integration -->
-<div id="map" style="height: 700px;"></div>
+<div id="map" style="height: 800px;"></div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script async defer
 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVRZ4YS4Xzl2lAV6kv5tFdFWs7T3GAYiU&callback=initMap">

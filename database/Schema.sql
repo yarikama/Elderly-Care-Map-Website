@@ -71,8 +71,7 @@ CREATE TABLE
         member_birthday DATE,
         member_gender char(5),
         member_type SMALLINT,
-        PRIMARY KEY (member_id),
-        CONSTRAINT uc_member_member_name UNIQUE (member_name)
+        PRIMARY KEY (member_id)
     );
 
 CREATE TABLE
