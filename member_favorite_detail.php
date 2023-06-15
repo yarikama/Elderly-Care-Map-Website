@@ -57,10 +57,11 @@
   /* 在此添加其他您需要的樣式 */
 }
 </style>
+<br/>
       <!-- Example row of columns -->
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="member_favorite.php" class="text-decoration-none text-muted fw-light">喜愛列表總覽</a></li>
+          <li class="breadcrumb-item"><a href="member_favorite.php" class="text-decoration-none text-muted fw-light">回到喜愛列表</a></li>
           <li class="breadcrumb-item active" aria-current="page"><?php echo $row['ins_name']; ?></li>
         </ol>
       </nav>
