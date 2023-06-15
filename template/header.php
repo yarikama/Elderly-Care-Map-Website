@@ -29,8 +29,10 @@
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#topNav" aria-controls="topNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-          <img src="images/longcare.png" alt="長照 Logo" style="max-height: 40px;"> 
-          <a class="navbar-brand" href="index.php">全國長照機構</a>
+          <a class="navbar-brand" href="index.php">
+            <img src="images/longcare.png" id='titleIcon' alt="長照 Logo" style="max-height: 40px;"> 
+            <label for="titleIcon" id='titleWords'>全國長照機構</label>
+          </a>
         </div>
 
         <!--/.navbar-collapse -->
@@ -54,6 +56,12 @@
         </div>
       </div>
     </nav>
+
+    <style>
+      #titleWords:hover{
+        cursor: pointer;
+      }
+    </style>
     <?php
       if(isset($title) && $title == "EMO大書店") {
     ?>
