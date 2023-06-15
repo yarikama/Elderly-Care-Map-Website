@@ -17,7 +17,7 @@
 
 	require_once "./functions/database_functions.php";
 	// print out header here
-	$title = "加入喜愛清單";
+	$title = "加入喜愛列表";
 	require "./template/header.php";
 
     if($_POST['ins_num']) $ins_num = $_POST['ins_num'];
