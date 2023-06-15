@@ -132,7 +132,7 @@
                     ?>
                   </table>
                   <div class="btn-group btn-group-sm" style="display: flex; justify-content: center;">
-                    <a href="member_favorite_delete.php?insnum=<?php echo $ins_num; ?>" class="btn btn-sm rounded-0 btn-danger" title="Delete" onclick="if(confirm('確定要刪除這本書的訂單嗎?') === false) event.preventDefault()"><i class="fa fa-trash"></i></a>
+                    <a href="member_favorite_delete.php?insnum=<?php echo $ins_num; ?>" class="btn btn-sm rounded-0 btn-danger" title="Delete" onclick="if(confirm('確定要將此機構移出喜愛列表嗎?') === false) event.preventDefault()"><i class="fa fa-trash"></i></a>
                   </div>
                   </form>
               </div>
