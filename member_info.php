@@ -45,7 +45,7 @@ require_once "./template/header.php";
                                             <option value="<?php echo ($_SESSION['member'][$attribute] == '男') ? '女':'男'; ?>"><?php echo ($_SESSION['member'][$attribute] == '男') ? '女':'男'; ?></option>
                                         </select>
                                     <?php }elseif($attribute == 'member_birthday'){?>
-                                        <input type="date" name="member_birthday" class="form-control rounded-0" disabled>
+                                        <input type="date" name="member_birthday" value="<?php echo $_SESSION['member'][$attribute]?>"class="form-control rounded-0" disabled>
                                     <?php }else{?>
                                     <input type="text" name="<?php echo $attribute; ?>" class="form-control rounded-0" value="<?php echo $_SESSION['member'][$attribute]?>" disabled>
                                     <?php }?>

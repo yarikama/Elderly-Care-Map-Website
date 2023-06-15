@@ -49,7 +49,7 @@ if (isset($_SESSION['member']) && $_SESSION['member'] == true) {
             $_SESSION['member']['member_birthday'] = $member_birthday;
             $sql .= ", `member_birthday` = '$member_birthday'";
         }
-        $sql .= " WHERE `member_ID` = '{$_SESSION['member']['member_ID']}'";
+        $sql .= " WHERE `member_id` = '{$_SESSION['member']['member_id']}'";
         // Execute the SQL statement
         if (mysqli_query($conn, $sql)) {
             $_SESSION['success_message'] = "會員資訊已更新";
