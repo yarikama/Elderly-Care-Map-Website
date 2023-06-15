@@ -132,12 +132,13 @@
                     ?>
                   </table>
                   
-                    <div class="text-center">
-                    <button type="submit" name="good_list" class="btn btn-primary">加入喜愛列表</button>
-                    <button id="searchBtn" class="btn btn-primary">點我搜尋</button>
-                    </div>
-                  </form>
-              </div>
+                  <div class="d-flex justify-content-center">
+                    <form method="post" action="process.php">
+                        <input type="hidden" name="ins_num" value="<?php echo $ins_num;?>">
+                        <button type="submit" name="good_list" class="btn btn-primary me-2">加入喜愛列表</button>
+                    </form>
+                    <button id="searchBtn" class="btn btn-primary" style="background-color: #FF5809;">點我搜尋</button>
+                </div>
             </div>
           </div>
        	</div>
@@ -145,3 +146,23 @@
 <?php
   require "./template/footer.php";
 ?>
+
+<script>
+  document.getElementById('searchBtn').addEventListener('click', function() {
+    var addr = '<?= $row['addr'] ?>'; // get institution name
+    var form = document.createElement('form'); // create form
+    form.method = 'GET'; // or 'POST' if your index.php handle it by post method
+    form.action = 'index.php'; // form submission url
+
+    var input = document.createElement('input'); // create input
+    input.type = 'hidden'; // input type is hidden
+    input.name = 'search'; // the name should match with the name in index.php
+    input.value = addr; // set the value to institution name
+
+    form.appendChild(input); // add input to form
+
+    document.body.appendChild(form); // add form to document
+
+    form.submit(); // submit form
+  });
+</script>

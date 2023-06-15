@@ -132,10 +132,18 @@
                       if(isset($conn)) {mysqli_close($conn); }
                     ?>
                   </table>
-                  <div class="btn-group btn-group-sm" style="display: flex; justify-content: center;">
-                    <a href="member_favorite_delete.php?insnum=<?php echo $ins_num; ?>" class="btn btn-sm rounded-0 btn-danger" title="Delete" onclick="if(confirm('確定要將此機構移出喜愛列表嗎?') === false) event.preventDefault()"><i class="fa fa-trash"></i></a>
+                  <div style="display: flex; justify-content: center;">
+                  <div class="btn-group btn-group-sm">
+                      <form method="post" action="process.php">
+                          <input type="hidden" name="ins_num" value="<?php echo $ins_num;?>">
+                          <a href="member_favorite_delete.php?insnum=<?php echo $ins_num; ?>" class="btn btn-sm rounded-0 btn-danger" title="Delete" onclick="if(confirm('確定要將此機構移出喜愛列表嗎?') === false) event.preventDefault()">刪除機構<i class="fa fa-trash"></i></a>
+                      </form>
                   </div>
-                  </form>
+                  <div class="btn-group btn-group-sm">
+                  <button id="searchBtn" type="button" class="btn btn-primary" style="background-color: #FF5809; display: flex; align-items: center;">點我搜尋 <i class="fa fa-search"></i></button>
+              </div>
+              </div>
+              </div>
               </div>
             </div>
           </div>
@@ -144,3 +152,23 @@
 <?php
   require "./template/footer.php";
 ?>
+
+<script>
+  document.getElementById('searchBtn').addEventListener('click', function() {
+    var addr = '<?= $row['addr'] ?>'; // get institution name
+    var form = document.createElement('form'); // create form
+    form.method = 'GET'; // or 'POST' if your index.php handle it by post method
+    form.action = 'index.php'; // form submission url
+
+    var input = document.createElement('input'); // create input
+    input.type = 'hidden'; // input type is hidden
+    input.name = 'search'; // the name should match with the name in index.php
+    input.value = addr; // set the value to institution name
+
+    form.appendChild(input); // add input to form
+
+    document.body.appendChild(form); // add form to document
+
+    form.submit(); // submit form
+  });
+</script>

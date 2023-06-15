@@ -50,6 +50,7 @@
 					<th>電話</th>
 					<th>總床位</th>
 					<th>地址</th>
+					<th>功能</th>
 				</tr>
 				</thead>
 				<tbody>
@@ -61,7 +62,7 @@
 					<td class="px-2 py-1 align-middle"><?php echo $row['addr']; ?></td>
 					<td class="px-2 py-1 align-middle text-center">
 						<div class="btn-group btn-group-sm">
-							<a href="member_favorite_detail.php?insnum=<?php echo $row['ins_num']; ?>" class="btn btn-sm rounded-0 btn-primary" title="detail"><i class="fa fa-align-left"></i></a>
+							<a href="member_favorite_detail.php?insnum=<?php echo $row['ins_num']; ?>" class="btn btn-sm rounded-0 btn-primary" title="detail"><i class="fa fa-eye"></i></a>
 							<a href="member_favorite_delete.php?insnum=<?php echo $row['ins_num']; ?>" class="btn btn-sm rounded-0 btn-danger" title="Delete" onclick="if(confirm('確定要將此機構移出喜愛列表嗎?') === false) event.preventDefault()"><i class="fa fa-trash"></i></a>
 						</div>
 					</td>

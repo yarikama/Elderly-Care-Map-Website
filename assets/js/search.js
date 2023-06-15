@@ -127,7 +127,8 @@ function geocodeAddress() {
             // 新增一個地圖標記
             let marker = new google.maps.Marker({
                 position: position,
-                map: map
+                map: map,
+                icon: 'images/originLocation.png'
             });
 
             // 獲取該地址的縣市和區縣
@@ -160,8 +161,7 @@ function geocodeAddress() {
                     let position = new google.maps.LatLng(center.latitude, center.longitude);
                     let marker = new google.maps.Marker({
                         position: position,
-                        map: map,
-                        icon: 'images/redpin.png'
+                        map: map
                     });
                     let content = '<div class="info-window">' +
                     '<h2 class="info-title" style="border-bottom: 1px solid #ccc;">' + center.ins_name + '</h2>' +

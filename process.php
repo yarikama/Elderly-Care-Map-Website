@@ -27,17 +27,28 @@
 	$customerid = $_SESSION['member']['member_id'];
 
 	$conn = db_connect();
+	$sql_check = "SELECT * FROM `member_favorite` WHERE member_id = '{$customerid}' AND ins_num = '{$ins_num}'";
+	$result_check = mysqli_query($conn, $sql_check);
+	if (mysqli_num_rows($result_check) > 0) {
+		// The record already exists, so you can handle this case as you want.
+		// For example, redirect back to the previous page with an error message.
+		$_SESSION['err_msg'] = 'The item is already in the favorite list.';
+		header("Location:  member_favorite.php"); // Replace 'previous_page.php' with the page you want to redirect to
+		exit;
+	}
+	
+	// If code execution reaches here, it means the record does not exist and you can insert it
 	$sql = "INSERT INTO `member_favorite` (member_id, ins_num) VALUES ('{$customerid}', '{$ins_num}')";
 	$result = mysqli_query($conn, $sql);
-
+	
 	// take orderid from order to insert order items
 	
 	if(!$result){
 		echo "Insert value false!" . mysqli_error($conn);
 		exit;
 	}else{
-        header ("Location: member_favorite.php");
-    }
+		header ("Location: member_favorite.php");
+	}
 	
 ?>
 

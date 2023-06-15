@@ -67,13 +67,14 @@ require_once "./template/header.php";
 
 <script>
     function enableEditing(attribute) {
-        let input = document.querySelector("input[name='" + attribute + "']");
+        let input = document.querySelector("input[name='" + attribute + "']") || document.querySelector("select[name='" + attribute + "']");
         input.disabled = !input.disabled;
         if (!input.disabled) {
             input.focus();
         }
     }
 </script>
+
 
 <?php
 require_once "./template/footer.php";

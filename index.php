@@ -6,8 +6,8 @@ require_once "./template/header.php";
 
 <div style="width: 300px; padding: 20px; box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1); border-radius: 8px; position: fixed; left:50px; top: 50px; z-index: 100; background-color: gray;">
     <div style="display: flex; justify-content: space-between; align-items: center;">
-        <input type="address" id="address" spellcheck="false" placeholder="請輸入地址" autocomplete="off" style="width: 80%; padding: 10px; border: none; border-bottom: 1px solid #ccc; font-size: 16px;">
-        <button id="searchBtn" style="background-color: #008CBA; color: white; padding: 10px 24px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px;">搜索</button>
+      <input type="address" id="address" spellcheck="false" placeholder="請輸入地址" autocomplete="off" value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>" style="width: 80%; padding: 10px; border: none; border-bottom: 1px solid #ccc; font-size: 16px;">
+      <button id="searchBtn" style="background-color: #008CBA; color: white; padding: 10px 24px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px;">搜索</button>
     </div>
     <div style="display: flex; justify-content: space-between; margin-top: 20px;">
         <select name="select-profession" id="select-county" style="width: 45%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; background-color: #f8f8f8; font-size: 16px;">

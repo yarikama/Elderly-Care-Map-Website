@@ -58,8 +58,4 @@ function initMap() {
         markers.push(Center);
     })
     .catch(error => errorCallback(error))
-    window.addEventListener('resize', function() {
-        var newZoom = Math.round(initialZoom * (window.innerWidth / initialWindowWidth));
-        map.setZoom(newZoom);
-      });
 }
