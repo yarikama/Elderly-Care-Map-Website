@@ -85,8 +85,6 @@ function initMap() {
         map.setZoom(newZoom);
       });
 }
-<<<<<<< HEAD
-
 
 function getTypingAddress(){
     sendAddress('typeAddress', $('#address').val());
@@ -239,5 +237,3 @@ function geocodeAddress() {
 //         });
 //     });
 // })
-=======
->>>>>>> 0996d13f45a5596b665213d4cce43db521e60caa
