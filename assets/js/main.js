@@ -26,19 +26,17 @@ function errorCallback(error){
     console.log(error.message);
 }
 
-function initMap(){
+function initMap() {
     var location;
     var geocoder = new google.maps.Geocoder();
     markers = [];
 
-    //set current position
+    // set current position
     getPosition()
-    .then((position)=> {
-        var myLatLng={lat: 0, lng: 0};
-        myLatLng['lat']= position.coords['latitude'];
-        myLatLng['lng']= position.coords['longitude'];
+    .then((position) => {
+        var myLatLng = {lat: position.coords.latitude, lng: position.coords.longitude};
 
-        //set current position to the center of map
+        // set current position to the center of map
         map = new google.maps.Map(document.getElementById('map'), {
             center: myLatLng,
             zoom: 15,
@@ -46,13 +44,13 @@ function initMap(){
             scaleControl: true,
             streetViewControl: false,
             fullscreenControl: false,
-            zoomControlOptions:{
+            zoomControlOptions: {
                 position: google.maps.ControlPosition.LEFT_BOTTOM
             }
         });
 
-        //set center marker
-        var Center= new google.maps.Marker({
+        // set center marker
+        var Center = new google.maps.Marker({
             position: myLatLng,
             map: map,
             title: '你的位置',
@@ -60,40 +58,68 @@ function initMap(){
         });
         markers.push(Center);
 
-        //change the icon of the marker
-        var nearbyInsData= '';
-        var nearbyIns= JSON.parse(nearbyInsData);
+        // Add event listener for district select change
+        districtSelect.addEventListener('change', function() {
+            // 清除原有的标记
+            for (let i = 0; i < markers.length; i++) {
+                markers[i].setMap(null);
+            }
+            markers = [];
+            
+            // 根據選中的縣市和區縣獲取長照中心
+            let selectedCounty = countySelect.value;
+            let selectedDistrict = this.value;
+            fetch(baseURL + '?action=getCenters&county=' + selectedCounty + '&district=' + selectedDistrict)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data); // 打印出獲取的長照中心數據
 
-        nearbyIns.forEach((institute)=>{
-            //classifying institute into three level
-            var image;
-            if(institute['bedNum']>=highLevel)
-                image= imageRoute[2];
-            else if(institute['bedNum']>=lowLevel)
-                image= imageRoute[1];
-            else
-                image= imageRoute[0];
+                data.forEach(center => {
+                    let lat = center.latitude; // 从你的数据中获取纬度
+                    let lng = center.longitude; // 从你的数据中获取经度
 
-            //add marker
-            var tmp= new google.maps.Marker({
-                position: institute['pos'],
-                map: map,
-                title: institute['name'],
-                icon: image
-            });
-            markers.push(tmp);
-        })
-        
+                    // 创建并添加一个新的标记
+                    let marker = new google.maps.Marker({
+                        position: new google.maps.LatLng(lat, lng),
+                        map: map
+                    });
+                    markers.push(marker);
+                });
+            }).catch(error => console.log(error));
+        });
     })
-    .catch(error=>errorCallback(error))
-    
+    .catch(error => errorCallback(error))
 }
+
 
 function getTypingAddress(){
     sendAddress('typeAddress', $('#address').val());
 }
 
-function sendAddress(method, address){
+function geocodeAddress() {
+    // 獲取用戶輸入的地址
+    let address = document.getElementById('address').value;
+
+    // 建立一個 Geocoder 物件來進行地理編碼
+    let geocoder = new google.maps.Geocoder();
+
+    geocoder.geocode({'address': address}, function(results, status) {
+        if (status === 'OK') {
+            // 如果地理編碼成功，將地圖的中心點設定為地址的地理位置
+            map.setCenter(results[0].geometry.location);
+
+            // 將標記添加到地圖上
+            new google.maps.Marker({
+                map: map,
+                position: results[0].geometry.location
+            });
+        } else {
+            alert('Geocode was not successful for the following reason: ' + status);
+        }
+    });
+}
+
+/*function sendAddress(method, address){
     var dataJSON= {};
     dataJSON[method]= address;
     $.ajax({
@@ -110,7 +136,7 @@ function sendAddress(method, address){
             alert(thrownError);
         }
     });
-}
+}*/
 
 
 // send data to php
@@ -136,7 +162,7 @@ function sendAddress(method, address){
     });
 }*/
 
-function searchMap(address){
+/*function searchMap(address){
     geocoder.geocode({
         'address': address
     }, function(results, status){
@@ -145,7 +171,7 @@ function searchMap(address){
             map.setCenter(location);
         }
     });
-}
+}*/
 
 // //change the center after searching
 // function searchMap(address, callback){

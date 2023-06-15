@@ -83,6 +83,16 @@ CREATE TABLE
     );
 
 CREATE TABLE
+    Taiwan_city_dist (
+        dist_num int AUTO_INCREMENT,
+        city varchar(14) NOT NULL,
+        dist VARCHAR(14) NOT NULL,
+        longitude FLOAT NOT NULL,
+        latitude FLOAT NOT NULL,
+        PRIMARY KEY (dist_num)
+    );
+
+CREATE TABLE
     tmp1 (
         ins_num int NOT NULL AUTO_INCREMENT PRIMARY KEY,
         public_private varchar(50) NOT NULL,
@@ -106,6 +116,15 @@ CREATE TABLE
         total_toll int,
         latitude float,
         longitude float
+    );
+
+CREATE TABLE
+    tmp2 (
+        addr varchar(20),
+        ma3 char(3),
+        longitude FLOAT,
+        latitude FLOAT,
+        TGOS_URL VARCHAR(250)
     );
 
 ALTER TABLE ins_address

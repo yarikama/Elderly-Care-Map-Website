@@ -23,26 +23,51 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         // 根據選擇的縣市更新鄉鎮市區列表
-        let selectedCounty = this.value;
-        fetch(baseURL + '?action=getDistricts&county=' + selectedCounty).then(response => response.json()).then(data => {
+        let selectedCity = this.value;
+        fetch(baseURL + '?action=getDistricts&city=' + selectedCity).then(response => response.json()).then(data => {
             data.forEach(district => {
                 let option = document.createElement('option');
-                option.text = district;
-                option.value = district;
+                option.text = district.dist;
+                option.value = JSON.stringify({name: district.dist, latitude: district.latitude, longitude: district.longitude});
                 districtSelect.add(option);
             });
         }).catch(error => console.log(error));
     });
 
-    // 當選擇區縣時，搜尋該地區的長照中心
     districtSelect.addEventListener('change', function() {
         // 根據選中的縣市和區縣獲取長照中心
         let selectedCounty = countySelect.value;
-        let selectedDistrict = this.value;
-        fetch(baseURL + '?action=getCenters&county=' + selectedCounty + '&district=' + selectedDistrict)
+        let selectedDistrict = JSON.parse(this.value);
+
+        // 重新設定地圖的中心
+        map.setCenter(new google.maps.LatLng(selectedDistrict.latitude, selectedDistrict.longitude));
+
+        fetch(baseURL + '?action=getCenters&city=' + selectedCounty + '&dist=' + selectedDistrict.name)
         .then(response => response.json())
         .then(data => {
+            // 清除舊的標記
+            if (window.markers) {
+                for (let i = 0; i < window.markers.length; i++) {
+                    window.markers[i].setMap(null);
+                }
+            }
+
+            // 建立新的標記並添加到地圖
+            window.markers = data.map(center => {
+                let position = new google.maps.LatLng(center.latitude, center.longitude);
+                return new google.maps.Marker({
+                    position: position,
+                    map: map
+                });
+            });
+
             console.log(data); // 打印出獲取的長照中心數據
-        }).catch(error => console.log(error));
+        })
+        .catch(error => console.log(error));
     });
+    // 當按鈕被點擊時調用 geocodeAddress 函數
+    let searchBtn = document.getElementById('searchBtn');
+    searchBtn.addEventListener('click', geocodeAddress);
 });
+
+
