@@ -1,16 +1,16 @@
 <?php
 	session_start();
 	// require_once "./functions/admin.php";
-	$title = "Order Information";
+	$title = "Member favorite";
 	require_once "./template/header.php";
 	require_once "./function/database_function.php";
     
-    $memberid = 1; //待改 $_SESSION['member']['member_ID']
+    $memberid = $_SESSION['member']['member_id'];
 
 	$conn = db_connect();
 	$sql = "SELECT institution.ins_num, ins_name, phone, housing_num, addr
 	FROM member_favorite, institution, ins_address, ins_capacity, ins_info
-    WHERE member_ID = '$memberid' AND institution.ins_num = member_favorite.ins_num
+    WHERE member_id = '$memberid' AND institution.ins_num = member_favorite.ins_num
 	AND institution.ins_num = ins_address.ins_num AND institution.ins_num = ins_capacity.ins_num
 	AND institution.ins_num = ins_info.ins_num
     ;";
@@ -62,7 +62,7 @@
 					<td class="px-2 py-1 align-middle text-center">
 						<div class="btn-group btn-group-sm">
 							<a href="member_favorite_detail.php?insnum=<?php echo $row['ins_num']; ?>" class="btn btn-sm rounded-0 btn-primary" title="detail"><i class="fa fa-align-left"></i></a>
-							<a href="member_favorite_delete.php?insnum=<?php echo $row['ins_num']; ?>" class="btn btn-sm rounded-0 btn-danger" title="Delete" onclick="if(confirm('確定要刪除這本書的訂單嗎?') === false) event.preventDefault()"><i class="fa fa-trash"></i></a>
+							<a href="member_favorite_delete.php?insnum=<?php echo $row['ins_num']; ?>" class="btn btn-sm rounded-0 btn-danger" title="Delete" onclick="if(confirm('確定要將此機構移出喜愛列表嗎?') === false) event.preventDefault()"><i class="fa fa-trash"></i></a>
 						</div>
 					</td>
 				</tr>
