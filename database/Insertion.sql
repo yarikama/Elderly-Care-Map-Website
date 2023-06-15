@@ -1,3 +1,5 @@
+update tmp1 set dist="新店區" where dist="新店區 ";
+
 INSERT INTO
     institution (ins_num, ins_name)
 SELECT ins_num, ins_name
@@ -111,5 +113,9 @@ WHERE orient3 IS NOT NULL;
 
 INSERT INTO
     Taiwan_city_dist (city, dist, longitude, latitude)
-    SELECT  LEFT(addr, 3), SUBSTRING(addr, 4), longitude, latitude
-    FROM tmp2;
+SELECT
+    LEFT(addr, 3),
+    SUBSTRING(addr, 4),
+    longitude,
+    latitude
+FROM tmp2;
