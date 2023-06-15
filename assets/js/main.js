@@ -27,6 +27,9 @@ function errorCallback(error){
 }
 
 function initMap() {
+    let districtSelect = document.getElementById('select-district');
+    let countySelect = document.getElementById('select-county');
+    let baseURL = './function/search_addr.php';
     var location;
     var geocoder = new google.maps.Geocoder();
     markers = [];
@@ -72,19 +75,6 @@ function initMap() {
             fetch(baseURL + '?action=getCenters&county=' + selectedCounty + '&district=' + selectedDistrict)
             .then(response => response.json())
             .then(data => {
-                console.log(data); // 打印出獲取的長照中心數據
-
-                data.forEach(center => {
-                    let lat = center.latitude; // 从你的数据中获取纬度
-                    let lng = center.longitude; // 从你的数据中获取经度
-
-                    // 创建并添加一个新的标记
-                    let marker = new google.maps.Marker({
-                        position: new google.maps.LatLng(lat, lng),
-                        map: map
-                    });
-                    markers.push(marker);
-                });
             }).catch(error => console.log(error));
         });
     })

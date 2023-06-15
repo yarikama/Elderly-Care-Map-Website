@@ -47,9 +47,12 @@ function getDistricts($conn, $city) {
 
     echo json_encode($districts);
 }
-
 function getCenters($conn, $city, $district) {
-    $query = "SELECT * FROM ins_address WHERE city = ? AND dist = ?";
+    $query = "SELECT i.*, a.*, ic.*, info.* FROM institution i 
+              JOIN ins_address a ON i.ins_num = a.ins_num 
+              JOIN ins_capacity ic ON i.ins_num = ic.ins_num
+              JOIN ins_info info ON i.ins_num = info.ins_num
+              WHERE a.city = ? AND a.dist = ?";
     $stmt = $conn->prepare($query);
     $stmt->bind_param("ss", $city, $district);
     $stmt->execute();
@@ -60,4 +63,4 @@ function getCenters($conn, $city, $district) {
     }
     echo json_encode($centers);
 }
-?>
+

@@ -22,3 +22,31 @@
     -webkit-line-clamp: 5;
     -webkit-box-orient: vertical;
 }
+
+.info-window {
+    max-width: 300px;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 4px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  }
+  
+  .info-window h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .info-window p {
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+  
+  .info-window a {
+    color: #008CBA;
+    text-decoration: none;
+  }
+  
+  .info-window a:hover {
+    text-decoration: underline;
+  }
+  

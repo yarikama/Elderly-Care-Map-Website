@@ -19,6 +19,35 @@ require_once "./template/header.php";
     </div>
 </div>
 
+<style>
+    .info-title {
+      color: #D4A30B;
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .info-details {
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+
+    .info-details a {
+      color: #008CBA;
+      text-decoration: none;
+    }
+
+    .info-details a:hover {
+      text-decoration: underline;
+    }
+
+    .info-window {
+      max-width: 500px;
+      background-color: #fff;
+      padding: 10px;
+      border-radius: 4px;
+      box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+    }
+  </style>
 
 <!-- Google Maps Integration -->
 <div id="map" style="height: 700px;"></div>
@@ -29,7 +58,7 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVRZ4YS4Xzl2lAV6kv5tFdFWs
 <script src="assets/js/main.js"></script>
 <script src="assets/js/search.js"></script>
 <!--script src="assets/js/style.js"></script-->
-<script src="assets/js/districts.js"></script>
+<!--script src="assets/js/districts.js"></script-->
 
 
 <?php
