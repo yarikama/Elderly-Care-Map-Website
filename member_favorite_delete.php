@@ -8,7 +8,6 @@
     $query = "DELETE FROM `member_favorite` WHERE ins_num = '$ins_num';";
     $result = mysqli_query($conn, $query);
 
-
     if ($result) {
         header("Location: member_favorite.php");
         exit;
