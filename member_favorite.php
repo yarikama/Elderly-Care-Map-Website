@@ -1,7 +1,7 @@
 <?php
 	session_start();
 	// require_once "./functions/admin.php";
-	$title = "Member favorite";
+	$title = "我的最愛";
 	require_once "./template/header.php";
 	require_once "./function/database_function.php";
     

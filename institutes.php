@@ -3,7 +3,7 @@
   require_once "./function/database_function.php";
   $count = 0;
   // connecto database
-  $title = "Long-term care institutions";
+  $title = "快速搜尋";
   require_once "./template/header.php";
 ?>
 <style>

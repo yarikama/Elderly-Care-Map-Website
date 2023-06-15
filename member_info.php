@@ -4,7 +4,7 @@ if (!isset($_SESSION['member'])) {
     header('location:member_login.php');
     exit;
 }
-$title = "Edit Profile";
+$title = "個人資料修改";
 require_once "./template/header.php";
 ?>
 <div><br></div>
@@ -40,7 +40,7 @@ require_once "./template/header.php";
                                 <label for="<?php echo $attribute; ?>" class="control-label"><?php echo $label; ?></label>
                                 <div class="input-group">
                                     <?php if($attribute == 'member_gender'){?>
-                                        <select name="member_gender" class="form-control rounded-0" >
+                                        <select name="member_gender" class="form-control rounded-0" disabled>
                                             <option value="<?php echo ($_SESSION['member'][$attribute] == '男') ? '男':'女'; ?>"><?php echo ($_SESSION['member'][$attribute] == '男') ? '男':'女'; ?></option>
                                             <option value="<?php echo ($_SESSION['member'][$attribute] == '男') ? '女':'男'; ?>"><?php echo ($_SESSION['member'][$attribute] == '男') ? '女':'男'; ?></option>
                                         </select>
