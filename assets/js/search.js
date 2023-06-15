@@ -89,10 +89,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 '<strong>提供床位 :</strong> ' + center.providing_num + '<br>' +
                 '</p>' +
                 '</div>';
-            
-            
-            
-            
 
                 // 建立資訊視窗
                 let infoWindow = new google.maps.InfoWindow({
