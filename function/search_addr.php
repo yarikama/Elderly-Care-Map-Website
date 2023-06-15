@@ -69,5 +69,5 @@ function getLevelStandard(){
               JOIN 
     
     
-    "
+    ";
 }
