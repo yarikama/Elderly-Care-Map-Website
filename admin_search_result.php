@@ -64,10 +64,10 @@
     <div class="input-group input-group-vertical">
         <?php
         $checkboxes = array(
-          '安養' => '安養',
-          '養護' => '養護',
-          '失智' => '失智',
-          '長照' => '長照'
+          '安養型' => '安養型',
+          '養護型' => '養護型',
+          '失智照顧型' => '失智照顧型',
+          '長照型' => '長照型'
         );
 
         foreach ($checkboxes as $key => $label) {
@@ -110,24 +110,24 @@
   if($_POST['dist'] != "全區域"){
     $sql .= " AND dist = '$dist' ";
   }
-  if (isset($_POST['長照'])){
+  if (isset($_POST['長照型'])){
     $conditions[] = "func_name = '長照'";
-    $func_name[] = "長照";
+    $func_name[] = "長照型";
     $func_num[] = "long_caring_num";
   }
-  if (isset($_POST['養護'])){
+  if (isset($_POST['養護型'])){
     $conditions[] = "func_name = '養護'";
-    $func_name[] = "養護";
+    $func_name[] = "養護型";
     $func_num[] = "nurse_num";
   }
-  if (isset($_POST['失智'])){
+  if (isset($_POST['失智照顧型'])){
     $conditions[] = "func_name = '失智'";
-    $func_name[] = "失智";
+    $func_name[] = "失智照顧型";
     $func_num[] = "dem_num";
   }
-  if (isset($_POST['安養'])){
+  if (isset($_POST['安養型'])){
     $conditions[] = "func_name = '安養'";
-    $func_name[] = "安養";
+    $func_name[] = "安養型";
     $func_num[] = "caring_num";
   }
   if (!empty($conditions)) {

@@ -80,7 +80,7 @@
                     <tr>
                       <th>服務項目</th>
                       <?php 
-                      for($i=0;$i<6;$i++){
+                      for($i=0;$i<7;$i++){
                         if($row2 = mysqli_fetch_assoc($result2)){
                           echo "<td><div class='oval-background'>".$row2['func_name']."</div></td>";
                         }else{
@@ -91,30 +91,31 @@
                     </tr>
                     <tr>
                       <th style="width: 80px;">地址</th>
-                      <td  colspan="6"><?php echo $row['addr']; ?></td>
+                      <td  colspan="7"><?php echo $row['addr']; ?></td>
                     </tr>
                     <tr>
                       <th>負責人</th>
-                      <td  colspan="6"><?php echo $row['manager']; ?></td>
+                      <td  colspan="7"><?php echo $row['manager']; ?></td>
                     </tr>
                     <tr>
                       <th>電話</th>
-                      <td  colspan="6"><?php echo $row['phone']; ?></td>
+                      <td  colspan="7"><?php echo $row['phone']; ?></td>
                     </tr>
                     <tr>
                     <th>網站</th>
-                    <td  colspan="6"><a href="<?php echo $row['website']; ?>"><?php echo $row['website']; ?></a></td>
+                    <td  colspan="7"><a href="<?php echo $row['website']; ?>"><?php echo $row['website']; ?></a></td>
                     </tr>
                     
 
                     <tr class="no-border">
                       <th>項目</th>
-                      <td style="text-align: center;"><b>安養</b></td>
-                      <td style="text-align: center;"><b>養護</b></td>
-                      <td style="text-align: center;"><b>失智</b></td>
-                      <td style="text-align: center;"><b>長照</b></td>
+                      <td style="text-align: center;"><b>安養型</b></td>
+                      <td style="text-align: center;"><b>養護型</b></td>
+                      <td style="text-align: center;"><b>失智照顧型</b></td>
+                      <td style="text-align: center;"><b>長照型</b></td>
                       <td style="color: red; text-align: center;"><b>總床位數</b></td>
                       <td style="color: red; text-align: center;"><b>總收容人數</b></td>
+                      <td style="color: red; text-align: center;"><b>總剩餘床位</b></td>
                     </tr>
                     <tr>
                       <th>床位數</th>
@@ -124,6 +125,7 @@
                       <td style="text-align: center;"><?php echo $row['long_caring_num']?></td>
                       <td style="color: red; text-align: center;"><?php echo $row['housing_num']?></td>
                       <td style="color: red; text-align: center;"><?php echo $row['providing_num']?></td>
+                      <td style="color: red; text-align: center;"><?php echo $row['housing_num']-$row['providing_num']?></td>
                     </tr>
 
                       
