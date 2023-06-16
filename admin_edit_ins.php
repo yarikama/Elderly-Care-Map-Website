@@ -104,19 +104,19 @@
                                 <input class="form-control rounded-0" type="text" name="addr" value="<?php echo $row['addr'];?>" readonly="true">
                             </div>
                             <div class="mb-3">
-                                <label class="control-label">安養床位</label>
+                                <label class="control-label">安養型床位</label>
                                 <input class="form-control rounded-0" type="number" name="caring_num" value="<?php echo $row['caring_num'];?>" required min="0" step="1">
                             </div>
                             <div class="mb-3">
-                                <label class="control-label">養護床位</label>
+                                <label class="control-label">養護型床位</label>
                                 <input class="form-control rounded-0" type="number" name="nurse_num" value="<?php echo $row['nurse_num'];?>" required min="0" step="1">
                             </div>
                             <div class="mb-3">
-                                <label class="control-label">失智床位</label>
+                                <label class="control-label">失智照顧型床位</label>
                                 <input class="form-control rounded-0" type="number" name="dem_num" value="<?php echo $row['dem_num'];?>" required min="0" step="1">
                             </div>
                             <div class="mb-3">
-                                <label class="control-label">長照床位</label>
+                                <label class="control-label">長照型床位</label>
                                 <input class="form-control rounded-0" type="number" name="long_caring_num" value="<?php echo $row['long_caring_num'];?>" required min="0" step="1">
                             </div>
                             <div class="mb-3">

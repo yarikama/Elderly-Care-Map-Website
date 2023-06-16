@@ -69,10 +69,10 @@ if(isset($_POST['next'])){
     <div class="input-group input-group-vertical">
         <?php
         $checkboxes = array(
-          '安養' => '安養',
-          '養護' => '養護',
-          '失智' => '失智',
-          '長照' => '長照'
+          '安養型' => '安養型',
+          '養護型' => '養護型',
+          '失智照顧型' => '失智照顧型',
+          '長照型' => '長照型'
         );
 
         foreach ($checkboxes as $key => $label) {
