@@ -30,7 +30,6 @@ function initMap() {
     let baseURL = './function/search_addr.php';
     var location;
     var geocoder = new google.maps.Geocoder();
-    markers = [];
 
     getPosition()
     .then((position) => {

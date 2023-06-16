@@ -138,7 +138,7 @@ if(isset($_POST['next'])){
 							<?php
 							$counter = 0; // 計數器初始化
                             $conn = db_connect();
-                            $sql = "SELECT distinct ins_name, phone, housing_num, addr FROM institution, ins_address, ins_capacity, ins_info
+                            $sql = "SELECT distinct institution.ins_num, ins_name, phone, housing_num, addr FROM institution, ins_address, ins_capacity, ins_info
                             WHERE institution.ins_num=ins_address.ins_num AND institution.ins_num=ins_capacity.ins_num 
                             AND institution.ins_num=ins_info.ins_num AND city = '{$city}'";
                             $result = mysqli_query($conn, $sql);

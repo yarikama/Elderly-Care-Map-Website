@@ -28,23 +28,51 @@
 	}else{
 		$row = mysqli_fetch_assoc($result);
 	}
-	if(isset($_POST['edit'])){
+
+    if(isset($_POST['edit'])){
 		$ins_num = trim($_POST['ins_num']);
-		$data = "";
-		foreach($_POST as $k => $v){
-			if(!in_array($k, ['edit', 'ins_num'])){
-				if(!empty($data)) $data .=", ";
-				$data .= "`{$k}` = '".(mysqli_real_escape_string($conn, $v))."'";
-			}
-		}
-		$query = "UPDATE book set $data where ins_num = '{$ins_num}'";
+		
+		// 更新institution表格
+		$ins_name = mysqli_real_escape_string($conn, $_POST['ins_name']);
+		$query = "UPDATE institution SET ins_name = '$ins_name' WHERE ins_num = '{$ins_num}'";
 		$result = mysqli_query($conn, $query);
-		if($result){
-			$_SESSION['success'] = "機構內容已成功更新";
-			header("Location: manage_system.php");
-		}else{
-			$err =  "無法更新機構內容 " . mysqli_error($conn);
+		if(!$result){
+			$err = "無法更新機構名稱 " . mysqli_error($conn);
 		}
+		
+		// 更新ins_capacity表格
+		$caring_num = $_POST['caring_num'];
+		$nurse_num = $_POST['nurse_num'];
+		$dem_num = $_POST['dem_num'];
+		$long_caring_num = $_POST['long_caring_num'];
+        $providing_num = $_POST['providing_num'];
+		$query = "UPDATE ins_capacity SET caring_num = $caring_num, nurse_num = $nurse_num, dem_num = $dem_num, 
+            long_caring_num = $long_caring_num, providing_num = $providing_num,
+            housing_num = ($caring_num + $nurse_num + $dem_num + $long_caring_num) WHERE ins_num = '{$ins_num}';";
+		$result = mysqli_query($conn, $query);
+		if(!$result){
+			$err = "無法更新床位數量 " . mysqli_error($conn);
+		}
+		
+		// 更新ins_info表格
+		$manager = mysqli_real_escape_string($conn, $_POST['manager']);
+		$phone = mysqli_real_escape_string($conn, $_POST['phone']);
+		$website = mysqli_real_escape_string($conn, $_POST['website']);
+		$query = "UPDATE ins_info SET manager = '$manager', phone = '$phone', website = '$website' WHERE ins_num = '{$ins_num}'";
+		$result = mysqli_query($conn, $query);
+		if(!$result){
+			$err = "無法更新機構資訊 " . mysqli_error($conn);
+		}
+
+		if(isset($err)){
+			$_SESSION['err_login'] = "機構內容更新失敗：";
+			$_SESSION['err_message'] = $err;
+		} else {
+			$_SESSION['success'] = "機構內容已成功更新";
+		}
+
+		header("Location: manage_system.php");
+		exit;
 	}
 	
 ?>
@@ -65,14 +93,15 @@
 						<?php 
 							endif;
 						?>
-						<form method="post" action="book_change.php?bookisbn=<?php echo $row['book_ISBN'];?>" enctype="multipart/form-data">
+						<form method="post" action="admin_edit_ins.php?insnum=<?php echo $row['ins_num'];?>" enctype="multipart/form-data">
+                            <input type="hidden" name="ins_num" value="<?php echo $row['ins_num']; ?>">
                             <div class="mb-3">
                                 <label class="control-label">名稱</label>
-                                <input class="form-control rounded-0" type="text" name="ins_name" value="<?php echo $row['ins_name'];?>" readOnly="true">
+                                <input class="form-control rounded-0" type="text" name="ins_name" value="<?php echo $row['ins_name'];?>" >
                             </div>
                             <div class="mb-3">
                                 <label class="control-label">地址</label>
-                                <input class="form-control rounded-0" type="text" name="addr" value="<?php echo $row['addr'];?>" required>
+                                <input class="form-control rounded-0" type="text" name="addr" value="<?php echo $row['addr'];?>" readonly="true">
                             </div>
                             <div class="mb-3">
                                 <label class="control-label">安養床位</label>
@@ -89,6 +118,10 @@
                             <div class="mb-3">
                                 <label class="control-label">長照床位</label>
                                 <input class="form-control rounded-0" type="number" name="long_caring_num" value="<?php echo $row['long_caring_num'];?>" required min="0" step="1">
+                            </div>
+                            <div class="mb-3">
+                                <label class="control-label">總收容人數</label>
+                                <input class="form-control rounded-0" type="number" name="providing_num" value="<?php echo $row['providing_num'];?>" required min="0" step="1">
                             </div>
                             <div class="mb-3">
                                 <label class="control-label">負責人</label>
