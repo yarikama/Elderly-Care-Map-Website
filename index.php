@@ -4,7 +4,7 @@ $title = "長照地圖";
 require_once "./template/header.php";
 ?>
 
-<div style="width: 350px; padding: 20px; box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1); border-radius: 8px; position: fixed; left:50px; top: 50px; z-index: 100; background-color: gray;">
+<div style="width: 350px; padding: 20px; box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1); border-radius: 8px; position: fixed; right: 50px; top: 50px; z-index: 100; background-color: gray;">
     <div style="display: flex; justify-content: space-between; align-items: center;">
       <input type="address" id="address" spellcheck="false" placeholder="請輸入地址" autocomplete="off" value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>" style="width: 80%; padding: 10px; border: none; border-bottom: 1px solid #ccc; font-size: 16px;">
       <button id="searchBtn" style="background-color: #008CBA; color: white; padding: 10px 24px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px;">搜索</button>
@@ -23,6 +23,19 @@ require_once "./template/header.php";
     <button class="radius-button" data-radius="1000"  style="background-color: green;">1公里</button>
     <button class="radius-button" data-radius="1500" >1.5公里</button>
     </div>
+    <div style="margin-top: 10px; padding: 10px; background-color: 	#003060	; border-radius: 8px; border: 2px solid block; box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1); text-align: center;">
+    <p>
+        <span style="color: #7AFEC6;">綠燈</span>
+        <span style="color: white;">代表空床位超過 10 個</span>
+        <br>
+        <span style="color: #FFED97;">黃燈</span>
+        <span style="color: white;">代表空床位數在 10 個以下</span>
+        <br>
+        <span style="color: #FFB5B5;">紅燈</span>
+        <span style="color: white;">代表沒有空床位數</span>
+    </p>
+</div>
+
 </div>
 
 <style>

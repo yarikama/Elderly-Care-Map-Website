@@ -3,7 +3,7 @@
 			<div class="container">
 				<div class="d-flex justify-content-between">
 					<div class="">
-						<a href="" target="_blank" class="text-decoration-none text-muted fw-bold smaller-text"> 老人長照機構 &copy; <?= "關心長照，健健康康" ?> </a>
+						<a href="home.html" target="_blank" class="text-decoration-none text-muted fw-bold smaller-text"> 全國長照機構 &copy; <?= "NYCU關心長照，健健康康NYCU" ?> </a>
 					</div>
 				</div>
 			</div>
