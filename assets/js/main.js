@@ -54,14 +54,8 @@ function initMap() {
             title: '你的位置',
             icon: 'images/originLocation.png'
         });
-<<<<<<< HEAD
-        markers.push(Center);
-        
-        // geocode the current position to get city and district
-=======
 
     // geocode the current position to get city and district
->>>>>>> 5926e3ade91e6710e05e07e493a242ab86052922
         geocoder.geocode({location: myLatLng}, function(results, status) {
             if (status === 'OK') {
                 let result = results[0];
