@@ -14,7 +14,12 @@
   $result = mysqli_query($conn, $query);
   $row = mysqli_fetch_assoc($result);
 
-  $query2 = "SELECT func_name FROM type_func WHERE ins_num = '$ins_num';";
+  $query2 = "SELECT * 
+  FROM type_func 
+  JOIN func_web
+  ON type_func.func_name = func_web.func_name
+  WHERE ins_num = '$ins_num'";
+
   $result2 = mysqli_query($conn, $query2);
   if(!$result or !$result2){
     echo "Can't retrieve data " . mysqli_error($conn);
@@ -81,7 +86,7 @@
                       <?php 
                       for($i=0;$i<7;$i++){
                         if($row2 = mysqli_fetch_assoc($result2)){
-                          echo "<td><div class='oval-background'>".$row2['func_name']."型</div></td>";
+                          echo "<td><a href='".$row2['func_website']."' target='_blank'><div class='oval-background'>".$row2['func_name']."型</div></a></td>";
                         }else{
                           echo "<td></td>";
                         }
