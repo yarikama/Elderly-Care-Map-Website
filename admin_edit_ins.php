@@ -135,12 +135,15 @@
                                 <label class="control-label">網站</label>
                                 <input class="form-control rounded-0" type="text" name="website" value="<?php echo $row['website'];?>" required>
                             </div>
-                            <div class="text-center">
-                                <button type="submit" name="edit"  class="btn btn-primary btn-sm rounded-0">更新</button>
-                                <button type="reset" class="btn btn-default btn-sm rounded-0 border">取消</button>
+							<div class="d-flex justify-content-center">
+								<form class="me-2">
+									<button type="submit" name="edit"  class="btn btn-primary btn-sm rounded-0">更新</button>
+									<button type="reset" class="btn btn-default btn-sm rounded-0 border">取消</button>
+								</form>
+							</div>
+							<div class="d-flex justify-content-center">
 								<button id="searchBtn" class="btn btn-primary" style="background-color: #FF5809;">點我搜尋</button>
-                            </div>
-						</form>
+							</div>
 					</div>
 				</div>
 			</div>
