@@ -37,11 +37,9 @@
 		exit;
 	}
 	
-	// If code execution reaches here, it means the record does not exist and you can insert it
+	
 	$sql = "INSERT INTO `member_favorite` (member_id, ins_num) VALUES ('{$customerid}', '{$ins_num}')";
 	$result = mysqli_query($conn, $sql);
-	
-	// take orderid from order to insert order items
 	
 	if(!$result){
 		echo "Insert value false!" . mysqli_error($conn);

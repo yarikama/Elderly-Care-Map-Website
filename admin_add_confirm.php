@@ -34,7 +34,9 @@ if (isset($_POST['member_submit'])) {
         }
 
         // Prepare the SQL statement
-        $sql = "INSERT INTO `member` (member_email, member_password, member_name, member_gender, member_phone, member_address, member_birthday, member_type) VALUES ('{$member_email}', '{$member_password}', '{$member_name}', '{$member_gender}', '{$member_phone}', '{$member_address}', '{$member_birthday}', '{$member_type}')";
+        $sql = "INSERT INTO `member` (member_email, member_password, member_name, member_gender, member_phone, member_address, 
+        member_birthday, member_type) VALUES ('{$member_email}', '{$member_password}', '{$member_name}', '{$member_gender}', 
+        '{$member_phone}', '{$member_address}', '{$member_birthday}', '{$member_type}')";
 
         // Prepare statement
         $stmt = $conn->prepare($sql);
