@@ -17,7 +17,7 @@
 		exit;
 	}
 
-	// get order data
+	// get member data
 	$sql = "SELECT distinct `member_id`, `member_name`, `member_email`, `member_address`, `member_phone`, 
     `member_birthday`, `member_gender`, `member_type`
     FROM `member` WHERE member_id = '$member_id';";	

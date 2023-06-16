@@ -96,7 +96,8 @@
 		$query_insert .= "INSERT INTO ins_info (ins_num, manager, phone, website)
                         SELECT ins_num, host_name, phone0, website FROM tmp1 WHERE ins_num = '{$ins_num}';";
         $query_insert .= "INSERT INTO ins_capacity (ins_num, caring_num, nurse_num, dem_num, long_caring_num, housing_num, providing_num)
-                        SELECT ins_num, caring, nursing, dementia, long_caring, (caring + nursing + dementia + long_caring) as housing_num, total_toll FROM tmp1 WHERE ins_num = '{$ins_num}';";
+                        SELECT ins_num, caring, nursing, dementia, long_caring, (caring + nursing + dementia + long_caring) as housing_num, total_toll 
+                        FROM tmp1 WHERE ins_num = '{$ins_num}';";
         $query_insert .= "INSERT INTO type_func (ins_num, func_name) SELECT ins_num, orient0 FROM tmp1 WHERE ins_num = '{$ins_num}' AND orient0 IS NOT NULL;";
         $query_insert .= "INSERT INTO type_func (ins_num, func_name) SELECT ins_num, orient1 FROM tmp1 WHERE ins_num = '{$ins_num}' AND orient1 IS NOT NULL;";
         $query_insert .= "INSERT INTO type_func (ins_num, func_name) SELECT ins_num, orient2 FROM tmp1 WHERE ins_num = '{$ins_num}' AND orient2 IS NOT NULL;";
