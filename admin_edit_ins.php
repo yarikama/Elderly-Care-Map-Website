@@ -138,6 +138,7 @@
                             <div class="text-center">
                                 <button type="submit" name="edit"  class="btn btn-primary btn-sm rounded-0">更新</button>
                                 <button type="reset" class="btn btn-default btn-sm rounded-0 border">取消</button>
+								<button id="searchBtn" class="btn btn-primary" style="background-color: #FF5809;">點我搜尋</button>
                             </div>
 						</form>
 					</div>
@@ -145,3 +146,23 @@
 			</div>
 		</div>
 	<div style="height: 20px;"></div>
+
+<script>
+  document.getElementById('searchBtn').addEventListener('click', function() {
+    var addr = '<?= $row['addr'] ?>'; // get institution name
+    var form = document.createElement('form'); // create form
+    form.method = 'GET'; // or 'POST' if your index.php handle it by post method
+    form.action = 'index.php'; // form submission url
+
+    var input = document.createElement('input'); // create input
+    input.type = 'hidden'; // input type is hidden
+    input.name = 'search'; // the name should match with the name in index.php
+    input.value = addr; // set the value to institution name
+
+    form.appendChild(input); // add input to form
+
+    document.body.appendChild(form); // add form to document
+
+    form.submit(); // submit form
+  });
+</script>

@@ -41,7 +41,7 @@
             <?php if(isset($_SESSION['member']['member_type']) && $_SESSION['member']['member_type'] == 2): ?>
               <li class="nav-item"><a class="nav-link" href="manage_system.php"><span class="fa fa-th-list"></span> 管理系統</a></li>
               <li class="nav-item"><a class="nav-link" href="admin_ins_add.php"><span class="fa fa-add"></span> 新增機構</a></li>
-              <li class="nav-item"><a class="nav-link" href="admin_register.php"><span class="fa fa-user-plus"></span> 新增管理員</a></li>
+              <li class="nav-item"><a class="nav-link" href="admin_add.php"><span class="fa fa-user-plus"></span> 新增管理員</a></li>
 			        <li class="nav-item"><a class="nav-link" href="admin_logout.php"><span class="fa fa-sign-out-alt"></span> 管理員登出</a></li>
             <?php elseif(isset($_SESSION['member']) && $_SESSION['member'] == true): ?>
                 <li class="nav-item"><a class="nav-link" href="institutes.php"><span class="fa fa-book"></span> 快速搜尋</a></li>
