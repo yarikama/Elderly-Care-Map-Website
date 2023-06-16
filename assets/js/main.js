@@ -54,8 +54,7 @@ function initMap() {
             title: '你的位置',
             icon: 'images/originLocation.png'
         });
-        markers.push(Center);
-        
+
     // geocode the current position to get city and district
         geocoder.geocode({location: myLatLng}, function(results, status) {
             if (status === 'OK') {
@@ -80,6 +79,7 @@ function initMap() {
                     .then(response => response.json())
                     .then(data => {
                         markers = createMarkers(map, data);
+                        markers.push(Center);
                         console.log(data); // log the data
                     })
                     .catch(error => console.log(error));
@@ -90,6 +90,8 @@ function initMap() {
                     .then(data => {
                         markers = createMarkers(map, data);
                         console.log(data); // log the data
+                        markers.push(Center);
+
                     })
                     .catch(error => console.log(error));
                 }

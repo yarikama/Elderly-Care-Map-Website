@@ -190,9 +190,9 @@ function createMarkers(map, data) {
         let position = new google.maps.LatLng(center.latitude, center.longitude);
         let icon;
         let rest = parseInt(center.housing_num) - parseInt(center.providing_num);
-        if (rest > 30) {
+        if (rest > 10) {
             icon = 'images/greenpin.png';
-        } else if (rest > 5 && rest <= 30) {
+        } else if (rest > 5 && rest <= 10) {
             icon = 'images/yellowpin.png';
         } else {
             icon = 'images/redpin.png';
@@ -225,7 +225,7 @@ function createMarkers(map, data) {
         '<strong>失智照顧型床位 :</strong> ' + center.dem_num + '<br>' +
         '<strong>總床位數 :</strong> ' + center.housing_num + '<br>' +
         '<strong>總收容人數 :</strong> ' + center.providing_num + '<br>' +
-        '<strong>總剩餘床位數 :</strong> ' + rest + '<br>'
+        '<strong>總剩餘床位數 :</strong> ' + rest + '<br>' +
         '</p>' +
         '<form method="post" action="process.php">' +
         '<input type="hidden" name="ins_num" value="' + center.ins_num + '">' +
