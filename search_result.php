@@ -98,7 +98,8 @@
 <?php
   $conn = db_connect();
   
-  $sql = "SELECT distinct institution.ins_num, ins_name, caring_num, nurse_num, dem_num, long_caring_num
+  $sql = "SELECT distinct institution.ins_num, ins_name, caring_num, nurse_num, dem_num, long_caring_num, 
+  (housing_num-providing_num) as avaliable_num
   FROM type_func, institution, ins_address, ins_capacity
   WHERE institution.ins_num = type_func.ins_num AND institution.ins_num = ins_address.ins_num 
   AND institution.ins_num = ins_capacity.ins_num
@@ -131,7 +132,7 @@
     $func_num[] = "caring_num";
   }
   if (!empty($conditions)) {
-    $sql .= " AND (" . implode(" OR ", $conditions) . ") ORDER BY ".implode(", ", $func_num).";";
+    $sql .= " AND (" . implode(" OR ", $conditions) . ") ORDER BY (housing_num-providing_num);";
   }
   $result = mysqli_query($conn, $sql);
   
