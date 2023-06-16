@@ -76,6 +76,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 // 搜尋地址後將地圖中心設為該地址並顯示該區域的長照地點
 function geocodeAddress() {
+
     let address = document.getElementById('address').value;
     let geocoder = new google.maps.Geocoder();
 
@@ -90,13 +91,19 @@ function geocodeAddress() {
             map.setCenter(position);
 
             console.log(result)
-            //新增一個地圖標記
+            // 新增一個地圖標記
+            if (window.marker) {
+                window.marker.setMap(null);
+            }
+            
             let marker = new google.maps.Marker({
                 position: position,
                 map: map,
                 icon: 'images/originLocation.png'
             });
-
+            
+            // 將新建的標記存入 window.marker 變數
+            window.marker = marker;
             // 獲取該地址的縣市和區縣
             let city, dist;
             for (let i = 0; i < results[0].address_components.length; i++) {
@@ -150,7 +157,6 @@ function geocodeAddress() {
 function createMarkers(map, data) {
     let temp = data.careCenters ? data.careCenters : data;
     let infoWindows = [];
-    
     if (window.markers) {
         for (let i = 0; i < window.markers.length; i++) {
             window.markers[i].setMap(null);
@@ -159,10 +165,19 @@ function createMarkers(map, data) {
 
     window.markers = temp.map(center => {
         let position = new google.maps.LatLng(center.latitude, center.longitude);
+        let icon;
+        if (center.providing_num > 40) {
+            icon = 'images/greenpin.png';
+        } else if (center.providing_num > 25 && center.providing_num <= 40) {
+            icon = 'images/yellowpin.png';
+        } else {
+            icon = 'images/redpin.png';
+        }
+
         let marker = new google.maps.Marker({
             position: position,
             map: map,
-            icon: 'images/redpin.png'
+            icon: icon
         });
 
         let content = '<div class="info-window">' +

@@ -1,9 +1,11 @@
 <?php
   session_start();
-  require_once "./function/database_function.php";
   $count = 0;
   // connecto database
-  $title = "快速搜尋";
+  require_once "./function/database_function.php";
+  
+
+  $title = "Long-term care institutions";
   require_once "./template/header.php";
 ?>
 <style>
@@ -20,12 +22,25 @@
   }
 
   .custom-checkbox input[type="checkbox"] {
-    transform: scale(1.5); /* 改变勾选框的大小 */
+    transform: scale(2); /* 改变勾选框的大小 */
     margin-right: 10px; /* 调整勾选框与文本之间的间距 */
-  }      
+  }
+  .custom-checkbox label {
+    font-size: 20px; /* 调整标签的字体大小 */
+  }
 </style>
+<?php
+if(isset($_POST['next'])){
+  $city = $_POST['city'];
+  $_SESSION['city'] = $city;
+}
+?>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="manage_system.php" class="text-decoration-none text-muted fw-light">選擇其他縣市 /</a></li>
+    </ol>
+</nav>
 <div>
-  <br/>
   <p class="lead text-center text-muted">長照機構管理</p>
 </div>
 <div style="text-align: center;">
@@ -33,38 +48,56 @@
 </div>
 <div class="row justify-content-center">
   <div class="col-8">
-    <form class="form-inline mb-4" method="POST" action="admin_ins_dist.php">
-      
+    <form class="form-inline mb-4" method="POST" action="admin_search_result.php">
     <div class="input-group input-group-vertical">
       <label for="pub_year" class="control-label ">所在縣市&nbsp&nbsp;</label>
-      <select class="form-select rounded-0" id="city" name="city" style="width: 50px; height: 40px;" >
+      <input type="text" name="city" class="form-control rounded-0" value="<?php echo $city?>" disabled>
+      <label for="pub_year" class="control-label ">&nbsp&nbsp所在區域&nbsp&nbsp;</label>
+      <select class="form-select rounded-0" id="dist" name="dist" style="width: 50px; height: 40px;" >
+        <option value="全區域">全區域</option>
         <?php
         $conn = db_connect();
-        $sql = "SELECT distinct city FROM ins_address";
+        $sql = "SELECT distinct dist FROM ins_address WHERE city = '{$city}'";
         $result = mysqli_query($conn, $sql);
         while($row = mysqli_fetch_assoc($result)){
-        echo "<option value=\"".$row['city']."\">".$row['city']."</option>";
+        echo "<option value=\"".$row['dist']."\">".$row['dist']."</option>";
         }
         ?>            
       </select>
-      
-      <label for="pub_year" class="control-label ">&nbsp&nbsp所在區域&nbsp&nbsp;</label>
-      <input type="text" name="all" class="form-control rounded-0" value="全區域" disabled>
+    </div>
+    <br/>
+    <div class="input-group input-group-vertical">
+        <?php
+        $checkboxes = array(
+          '安養' => '安養',
+          '養護' => '養護',
+          '失智' => '失智',
+          '長照' => '長照'
+        );
+
+        foreach ($checkboxes as $key => $label) {
+          echo '<div class="custom-checkbox">';
+          echo '<input type="checkbox" name="' . $key . '" id="' . $key . '">';
+          echo '<label for="' . $key . '">' . $label . '</label>';
+          echo '</div>';
+        }
+        ?>
     </div>
     <br/>
     <div class="input-group input-group-vertical">
       <div style="display: block; text-align: center;">
-        <button type="submit" name="next" class="btn btn-secondary rounded-0">下一步</button>
+        <button type="submit" name="next" class="btn btn-secondary rounded-0">搜尋
+            <li class="fa fa-search"></li>
+        </button>
       </div>
     </div>
+
     </form>
   </div>
 </div>
 <div style="text-align: center;">
   <hr class="bg-warning" style="width: 150ex; height: 1px; opacity: 1; margin-left: auto; margin-right: auto;">
 </div>
-
-
 <div style="height: 20px;"></div>
 	
 	
@@ -105,10 +138,10 @@
 							<?php
 							$counter = 0; // 計數器初始化
                             $conn = db_connect();
-                            $query = "SELECT * from institution, ins_address, ins_capacity, ins_info
+                            $sql = "SELECT distinct ins_name, phone, housing_num, addr FROM institution, ins_address, ins_capacity, ins_info
                             WHERE institution.ins_num=ins_address.ins_num AND institution.ins_num=ins_capacity.ins_num 
-                            AND institution.ins_num=ins_info.ins_num;";
-                            $result = mysqli_query($conn, $query);
+                            AND institution.ins_num=ins_info.ins_num AND city = '{$city}'";
+                            $result = mysqli_query($conn, $sql);
                             if(!$result){
                                 echo "Can't retrieve data " . mysqli_error($conn);
                                 exit;
@@ -127,8 +160,8 @@
 									<td class="px-2 py-1 align-middle"><?php echo $row['addr']; ?></td>
 									<td class="px-2 py-1 align-middle text-center">
 										<div class="btn-group btn-group-sm">
-											<a href="admin_edit_ins.php?insnum=<?php echo $row['institution.ins_num']; ?>" class="btn btn-sm rounded-0 btn-primary" title="編輯"><i class="fa fa-edit"></i></a>
-											<a href="admin_delete_ins.php?insnum=<?php echo $row['institution.ins_num']; ?>" class="btn btn-sm rounded-0 btn-danger" title="刪除" onclick="if(confirm('確定要刪除此長照機構?') === false) event.preventDefault()"><i class="fa fa-trash"></i></a>
+											<a href="admin_edit_ins.php?insnum=<?php echo $row['ins_num']; ?>" class="btn btn-sm rounded-0 btn-primary" title="編輯"><i class="fa fa-edit"></i></a>
+											<a href="admin_delete_ins.php?insnum=<?php echo $row['ins_num']; ?>" class="btn btn-sm rounded-0 btn-danger" title="刪除" onclick="if(confirm('確定要刪除此長照機構?') === false) event.preventDefault()"><i class="fa fa-trash"></i></a>
 										</div>
 									</td>
 								</tr>
@@ -143,7 +176,6 @@
 
 <div style="height: 20px;"></div>
 <?php
-      
   if(isset($conn)) { mysqli_close($conn); }
   require_once "./template/footer.php";
 ?>
