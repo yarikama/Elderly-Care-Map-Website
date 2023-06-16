@@ -4,7 +4,7 @@ $title = "長照地圖";
 require_once "./template/header.php";
 ?>
 
-<div style="width: 300px; padding: 20px; box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1); border-radius: 8px; position: fixed; left:50px; top: 50px; z-index: 100; background-color: gray;">
+<div style="width: 350px; padding: 20px; box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1); border-radius: 8px; position: fixed; left:50px; top: 50px; z-index: 100; background-color: gray;">
     <div style="display: flex; justify-content: space-between; align-items: center;">
       <input type="address" id="address" spellcheck="false" placeholder="請輸入地址" autocomplete="off" value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>" style="width: 80%; padding: 10px; border: none; border-bottom: 1px solid #ccc; font-size: 16px;">
       <button id="searchBtn" style="background-color: #008CBA; color: white; padding: 10px 24px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px;">搜索</button>
@@ -16,6 +16,12 @@ require_once "./template/header.php";
         <select name="select-superpower" id="select-district" style="width: 45%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; background-color: #f8f8f8; font-size: 16px;">
             <option value="">鄉鎮市區</option>
         </select>
+    </div>
+    <div style="margin-top: 20px;">
+    <button class="radius-button" data-radius="0" style="background-color: black;">無</button>
+    <button class="radius-button" data-radius="500" style="background-color: brown;" >0.5公里</button>
+    <button class="radius-button" data-radius="1000"  style="background-color: green;">1公里</button>
+    <button class="radius-button" data-radius="1500" >1.5公里</button>
     </div>
 </div>
 
@@ -47,7 +53,33 @@ require_once "./template/header.php";
       border-radius: 4px;
       box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
     }
+    .radius-button {
+    /* 按鈕背景色 */
+    background-color: #4CAF50;
+    /* 文字顏色 */
+    color: white;
+    /* 文字大小 */
+    font-size: 14px;
+    /* 邊框寬度 */
+    border: 30px;
+    /* 邊框半徑 (圓角) */
+    border-radius: 5px;
+    /* 上下邊距 */
+    padding: 8px 13px;
+    /* 鼠標滑過時的樣式 */
+    transition: all 0.5s;
+    cursor: pointer;
+    }
 
+    .radius-button:hover {
+        /* 鼠標滑過時的背景色 */
+        background-color: #45a049;
+    }
+
+    .radius-button:active {
+        /* 點擊按鈕時的背景色 */
+        background-color: #3e8e41;
+}
     body, html{
       position: relative;
       height: 100%;

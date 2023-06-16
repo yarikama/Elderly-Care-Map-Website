@@ -1,5 +1,12 @@
 // 設定 API URL
 let baseURL = './function/search_addr.php';
+let radiusButtons = document.querySelectorAll('.radius-button');
+radiusButtons.forEach(button => {
+    button.addEventListener('click', function() {
+        let radius = this.dataset.radius;
+        geocodeAddress(radius);
+    });
+});
 
 document.addEventListener("DOMContentLoaded", function() {
     let countySelect = document.getElementById('select-county');
@@ -75,7 +82,7 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 // 搜尋地址後將地圖中心設為該地址並顯示該區域的長照地點
-function geocodeAddress() {
+function geocodeAddress(radius) {
 
     let address = document.getElementById('address').value;
     let geocoder = new google.maps.Geocoder();
@@ -96,6 +103,7 @@ function geocodeAddress() {
                 window.marker.setMap(null);
             }
             
+
             let marker = new google.maps.Marker({
                 position: position,
                 map: map,
@@ -104,6 +112,21 @@ function geocodeAddress() {
             
             // 將新建的標記存入 window.marker 變數
             window.marker = marker;
+
+            if (window.circle) {
+                window.circle.setMap(null);
+            }
+            window.circle = new google.maps.Circle({
+                strokeColor: '#FF0000',
+                strokeOpacity: 0.8,
+                strokeWeight: 2,
+                fillColor: '#FF0000',
+                fillOpacity: 0.35,
+                map: map,
+                center: position,
+                radius: parseFloat(radius)// 將傳入的 radius 參數轉換為數值
+            });
+
             // 獲取該地址的縣市和區縣
             let city, dist;
             for (let i = 0; i < results[0].address_components.length; i++) {
@@ -166,9 +189,10 @@ function createMarkers(map, data) {
     window.markers = temp.map(center => {
         let position = new google.maps.LatLng(center.latitude, center.longitude);
         let icon;
-        if (center.providing_num > 40) {
+        let rest = parseInt(center.housing_num) - parseInt(center.providing_num);
+        if (rest > 30) {
             icon = 'images/greenpin.png';
-        } else if (center.providing_num > 25 && center.providing_num <= 40) {
+        } else if (rest > 5 && rest <= 30) {
             icon = 'images/yellowpin.png';
         } else {
             icon = 'images/redpin.png';
@@ -179,7 +203,6 @@ function createMarkers(map, data) {
             map: map,
             icon: icon
         });
-
         let content = '<div class="info-window">' +
         '<h2 class="info-title" style="border-bottom: 1px solid #ccc;">' + center.ins_name + '</h2>' +
         '<div style="display: flex; align-items: center; margin-bottom: 10px;">' +
@@ -200,8 +223,9 @@ function createMarkers(map, data) {
         '<strong>安養型床位 :</strong> ' + center.caring_num + '<br>' +
         '<strong>長照型床位 :</strong> ' + center.long_caring_num + '<br>' +
         '<strong>失智照顧型床位 :</strong> ' + center.dem_num + '<br>' +
-        '<strong>使用中床位 :</strong> ' + center.housing_num + '<br>' +
-        '<strong>提供床位 :</strong> ' + center.providing_num + '<br>' +
+        '<strong>總床位數 :</strong> ' + center.housing_num + '<br>' +
+        '<strong>總收容人數 :</strong> ' + center.providing_num + '<br>' +
+        '<strong>總剩餘床位數 :</strong> ' + rest + '<br>'
         '</p>' +
         '<form method="post" action="process.php">' +
         '<input type="hidden" name="ins_num" value="' + center.ins_num + '">' +
