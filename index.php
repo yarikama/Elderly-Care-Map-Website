@@ -23,10 +23,17 @@ require_once "./template/header.php";
     <button class="radius-button" data-radius="1000"  style="background-color: green;">1公里</button>
     <button class="radius-button" data-radius="1500" >1.5公里</button>
     </div>
-    <div style="margin-top: 10px; padding: 10px; background-color: #484891; border-radius: 8px; border: 2px solid block; box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);">
-    <p><span style="color: #7AFEC6;">綠燈代表有空床位超過 10 個</span><br>
-    <span style="color: #FFED97;">黃燈代表空床位數在 6 到 10 個之間</span><br>
-    <span style="color: #FFB5B5;">紅燈代表空床位數在 5 個以下</span></p>
+    <div style="margin-top: 10px; padding: 10px; background-color: 	#003060	; border-radius: 8px; border: 2px solid block; box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1); text-align: center;">
+    <p>
+        <span style="color: #7AFEC6;">綠燈</span>
+        <span style="color: white;">代表空床位超過 10 個</span>
+        <br>
+        <span style="color: #FFED97;">黃燈</span>
+        <span style="color: white;">代表空床位數在 6-10 個之間</span>
+        <br>
+        <span style="color: #FFB5B5;">紅燈</span>
+        <span style="color: white;">代表空床位數在 5 個以下</span>
+    </p>
 </div>
 
 </div>
