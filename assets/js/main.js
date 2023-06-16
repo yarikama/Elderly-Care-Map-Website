@@ -30,7 +30,6 @@ function initMap() {
     let baseURL = './function/search_addr.php';
     var location;
     var geocoder = new google.maps.Geocoder();
-    markers = [];
 
     getPosition()
     .then((position) => {
@@ -56,6 +55,48 @@ function initMap() {
             icon: 'images/originLocation.png'
         });
         markers.push(Center);
+        
+    // geocode the current position to get city and district
+        geocoder.geocode({location: myLatLng}, function(results, status) {
+            if (status === 'OK') {
+                let result = results[0];
+                let city, dist;
+                for (let i = 0; i < result.address_components.length; i++) {
+                    let component = result.address_components[i];
+                    if (component.types.includes('administrative_area_level_1')) {
+                        city = component.short_name;
+                    } else if (component.types.includes('administrative_area_level_2')) {
+                        city = component.short_name;
+                    } else if (component.types.includes('administrative_area_level_3')) {
+                        dist = component.short_name;
+                    }
+                }
+                if(city[0]==='台')
+                    city= city.replace('台', '臺');
+
+                // Based on the city and district, get the care centers
+                if(dist){
+                    fetch(baseURL + '?action=getCenters&city=' + city + '&dist=' + dist)
+                    .then(response => response.json())
+                    .then(data => {
+                        markers = createMarkers(map, data);
+                        console.log(data); // log the data
+                    })
+                    .catch(error => console.log(error));
+                }
+                else{
+                    fetch(baseURL + '?action=getDistricts&city=' + city)
+                    .then(response => response.json())
+                    .then(data => {
+                        markers = createMarkers(map, data);
+                        console.log(data); // log the data
+                    })
+                    .catch(error => console.log(error));
+                }
+            } else {
+                console.error('Geocoder failed due to: ' + status);
+            }
+        });
     })
     .catch(error => errorCallback(error))
 }
