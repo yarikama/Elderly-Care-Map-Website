@@ -28,12 +28,12 @@ function initMap() {
     let districtSelect = document.getElementById('select-district');
     let countySelect = document.getElementById('select-county');
     let baseURL = './function/search_addr.php';
-    var location;
+    var myLatLng;
     var geocoder = new google.maps.Geocoder();
-
+    console.log('myLatLng:' + myLatLng);
     getPosition()
     .then((position) => {
-        var myLatLng = {lat: position.coords.latitude, lng: position.coords.longitude};
+        myLatLng = {lat: position.coords.latitude, lng: position.coords.longitude};
 
         map = new google.maps.Map(document.getElementById('map'), {
             center: myLatLng,
@@ -78,7 +78,7 @@ function initMap() {
                     fetch(baseURL + '?action=getCenters&city=' + city + '&dist=' + dist)
                     .then(response => response.json())
                     .then(data => {
-                        markers = createMarkers(map, data);
+                        markers = createMarkers(map, data, myLatLng);
                         markers.push(Center);
                         console.log(data); // log the data
                     })
@@ -88,7 +88,7 @@ function initMap() {
                     fetch(baseURL + '?action=getDistricts&city=' + city)
                     .then(response => response.json())
                     .then(data => {
-                        markers = createMarkers(map, data);
+                        markers = createMarkers(map, data, myLatLng);
                         console.log(data); // log the data
                         markers.push(Center);
 

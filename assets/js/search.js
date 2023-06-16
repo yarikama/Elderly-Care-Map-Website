@@ -154,7 +154,7 @@ function geocodeAddress(radius) {
                 // 清除舊的標記
                     markers.forEach(marker => marker.setMap(null));
                     // 確保此時的 map 是已經被初始化
-                    markers = createMarkers(map, data);
+                    markers = createMarkers(map, data, position);
                     console.log(data); // 打印出獲取的長照中心數據
                 })
                 .catch(error => console.log(error));
@@ -166,7 +166,7 @@ function geocodeAddress(radius) {
                     // 清除舊的標記
                     markers.forEach(marker => marker.setMap(null));
                     // 確保此時的 map 是已經被初始化
-                    markers = createMarkers(map, data);
+                    markers = createMarkers(map, data, position);
                     console.log(data); // 打印出獲取的長照中心數據
                 })
                 .catch(error => console.log(error));
@@ -178,7 +178,8 @@ function geocodeAddress(radius) {
     });
 }
 
-function createMarkers(map, data) {
+function createMarkers(map, data, currentPosition = null) {
+    console.log('currentPosition:', currentPosition);
     let temp = data.careCenters ? data.careCenters : data;
     let infoWindows = [];
     if (window.markers) {
@@ -189,6 +190,13 @@ function createMarkers(map, data) {
 
     window.markers = temp.map(center => {
         let position = new google.maps.LatLng(center.latitude, center.longitude);
+        let distance = null;
+        if (currentPosition) {
+            // 使用 computeDistanceBetween 函數來計算當前位置與中心的距離（以公尺為單位）。
+            distance = google.maps.geometry.spherical.computeDistanceBetween(currentPosition, position);
+            distance = (distance / 1000).toFixed(2); // 轉換為公里並保留兩位小數
+        }
+        console.log('distance:', distance);
         let icon;
         let rest = parseInt(center.housing_num) - parseInt(center.providing_num);
         if (rest > 10) {
@@ -216,6 +224,9 @@ function createMarkers(map, data) {
         '<strong>電話 :</strong> ' + center.phone + '<br>' +
         '<strong>網站 :</strong><a href="' + center.website + '">' + center.website + '</a><br>' +
         '<div style="display: flex; align-items: center; margin-top: 10px;">' +
+        '<i class="fas fa-ruler" style="font-size: 20px; margin-right: 10px;"></i>' +
+        '<span class="info-subtitle" style="font-size: 18px; color: orange;">距離我 <span style="color: red;">' + distance +'</span><span style="color: orange;"> 公里</span>' +
+        '</div>' +        '<div style="display: flex; align-items: center; margin-top: 10px;">' +
         '<i class="fas fa-bed" style="font-size: 20px; margin-right: 10px;"></i>' +
         '<h3 class="info-subtitle" style="font-size: 18px; color: orange;">床位數</h3>' +
         '</div>' +
