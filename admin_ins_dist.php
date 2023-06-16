@@ -5,7 +5,7 @@
   require_once "./function/database_function.php";
   
 
-  $title = "Long-term care institutions";
+  $title = "長照機構";
   require_once "./template/header.php";
 ?>
 <style>

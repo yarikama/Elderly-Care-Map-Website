@@ -141,7 +141,7 @@
     exit;
   }
 
-  $title = "Search Result";
+  $title = "搜尋結果";
 ?>
 
 

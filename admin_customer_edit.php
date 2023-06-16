@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	$title = "Edit Customer information";
+	$title = "編輯會員資訊";
 		require_once "./template/header.php";
 	require_once "./function/database_function.php";
 	$conn = db_connect();
