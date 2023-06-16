@@ -41,51 +41,10 @@ document.addEventListener("DOMContentLoaded", function() {
             if (data.districts.length > 0) {
                 let cityCenter = new google.maps.LatLng(data.districts[0].latitude, data.districts[0].longitude);
                 map.setCenter(cityCenter);
-            }
-
-            if (window.markers) {
-                for (let i = 0; i < window.markers.length; i++) {
-                    window.markers[i].setMap(null);
-                }
-            }
-
-            window.markers = data.careCenters.map(center => {
-                let position = new google.maps.LatLng(center.latitude, center.longitude);
-                let marker = new google.maps.Marker({
-                    position: position,
-                    map: map,
-                    icon: 'images/redpin.png'
-                });
-    
-                // 原有的資訊視窗和點擊事件綁定代碼
-                let content = '<div class="info-window">' +
-                '<h2 class="info-title" style="border-bottom: 1px solid #ccc;">' + center.ins_name + '</h2>' +
-                '<div style="display: flex; align-items: center; margin-bottom: 10px;">' +
-                '<i class="fas fa-info-circle" style="font-size: 20px; margin-right: 10px;"></i>' +
-                '<h3 class="info-subtitle" style="font-size: 18px; color: orange;">資訊</h3>' +
-                '</div>' +
-                '<p class="info-details" style="font-size: 16px;">' +
-                '<strong>地址 :</strong> ' + center.addr + '<br>' +
-                '<strong>管理員 :</strong> ' + center.manager + '<br>' +
-                '<strong>電話 :</strong> ' + center.phone + '<br>' +
-                '<strong>網站 :</strong><a href="' + center.website + '">' + center.website + '</a><br>' +
-                '<div style="display: flex; align-items: center; margin-top: 10px;">' +
-                '<i class="fas fa-bed" style="font-size: 20px; margin-right: 10px;"></i>' +
-                '<h3 class="info-subtitle" style="font-size: 18px; color: orange;">床位數</h3>' +
-                '</div>' +
-                '<p class="info-details" style="font-size: 16px;">' +
-                '<strong>養護型床位 :</strong> ' + center.nurse_num + '<br>' +
-                '<strong>安養型床位 :</strong> ' + center.caring_num + '<br>' +
-                '<strong>長照型床位 :</strong> ' + center.long_caring_num + '<br>' +
-                '<strong>失智照顧型床位 :</strong> ' + center.dem_num + '<br>' +
-                '<strong>使用中床位 :</strong> ' + center.housing_num + '<br>' +
-                '<strong>提供床位 :</strong> ' + center.providing_num + '<br>' +
-                '</p>' +
-                '</div>';
-
-    
-                return marker;
-            });
+                // 清除舊標記並創建新標記
+                markers.forEach(marker => marker.setMap(null));
+                markers = createMarkers(map, data);
+            }      
         })
         .catch(error => console.log(error));
     });
@@ -102,57 +61,9 @@ document.addEventListener("DOMContentLoaded", function() {
         .then(response => response.json())
         .then(data => {
             // 清除舊的標記
-            if (window.markers) {
-                for (let i = 0; i < window.markers.length; i++) {
-                    window.markers[i].setMap(null);
-                }
-            }
-            // 建立新的標記並添加到地圖
-            window.markers = data.map(center => {
-                let position = new google.maps.LatLng(center.latitude, center.longitude);
-                let marker = new google.maps.Marker({
-                    position: position,
-                    map: map,
-                    icon: 'images/redpin.png'
-                });
-                let content = '<div class="info-window">' +
-                '<h2 class="info-title" style="border-bottom: 1px solid #ccc;">' + center.ins_name + '</h2>' +
-                '<div style="display: flex; align-items: center; margin-bottom: 10px;">' +
-                '<i class="fas fa-info-circle" style="font-size: 20px; margin-right: 10px;"></i>' +
-                '<h3 class="info-subtitle" style="font-size: 18px; color: orange;">資訊</h3>' +
-                '</div>' +
-                '<p class="info-details" style="font-size: 16px;">' +
-                '<strong>地址 :</strong> ' + center.addr + '<br>' +
-                '<strong>管理員 :</strong> ' + center.manager + '<br>' +
-                '<strong>電話 :</strong> ' + center.phone + '<br>' +
-                '<strong>網站 :</strong><a href="' + center.website + '">' + center.website + '</a><br>' +
-                '<div style="display: flex; align-items: center; margin-top: 10px;">' +
-                '<i class="fas fa-bed" style="font-size: 20px; margin-right: 10px;"></i>' +
-                '<h3 class="info-subtitle" style="font-size: 18px; color: orange;">床位數</h3>' +
-                '</div>' +
-                '<p class="info-details" style="font-size: 16px;">' +
-                '<strong>養護型床位 :</strong> ' + center.nurse_num + '<br>' +
-                '<strong>安養型床位 :</strong> ' + center.caring_num + '<br>' +
-                '<strong>長照型床位 :</strong> ' + center.long_caring_num + '<br>' +
-                '<strong>失智照顧型床位 :</strong> ' + center.dem_num + '<br>' +
-                '<strong>使用中床位 :</strong> ' + center.housing_num + '<br>' +
-                '<strong>提供床位 :</strong> ' + center.providing_num + '<br>' +
-                '</p>' +
-                '</div>';
-
-                // 建立資訊視窗
-                let infoWindow = new google.maps.InfoWindow({
-                    content: content
-                });
-
-                // 綁定點擊事件
-                marker.addListener('click', function() {
-                    infoWindow.open(map, marker);
-                });
-
-                return marker;
-            });
-
+            markers.forEach(marker => marker.setMap(null));
+            // 確保此時的 map 是已經被初始化
+            markers = createMarkers(map, data);
             console.log(data); // 打印出獲取的長照中心數據
         })
         .catch(error => console.log(error));
@@ -200,72 +111,100 @@ function geocodeAddress() {
             }
             if(city[0]==='台')
                 city= city.replace('台', '臺');
-
-            // 打印縣市和鄉鎮市區信息
-            console.log('縣市:', city);
-            console.log('鄉鎮市區:', dist);
-            // 根據選中的縣市和區縣獲取長照中心
-            fetch(baseURL + '?action=getCenters&city=' + city + '&dist=' + dist)
-            .then(response => response.json())
-            .then(data => {
+            
+            if(dist){
+                // 打印縣市和鄉鎮市區信息
+                console.log('縣市:', city);
+                console.log('鄉鎮市區:', dist);
+                // 根據選中的縣市和區縣獲取長照中心
+                fetch(baseURL + '?action=getCenters&city=' + city + '&dist=' + dist)
+                .then(response => response.json())
+                .then(data => {
                 // 清除舊的標記
-                if (window.markers) {
-                    for (let i = 0; i < window.markers.length; i++) {
-                        window.markers[i].setMap(null);
-                    }
-                }
-                // 建立新的標記並添加到地圖
-                window.markers = data.map(center => {
-                    let position = new google.maps.LatLng(center.latitude, center.longitude);
-                    let marker = new google.maps.Marker({
-                        position: position,
-                        map: map,
-                        icon: imageRoute[0]
-                    });
-                    let content = '<div class="info-window">' +
-                    '<h2 class="info-title" style="border-bottom: 1px solid #ccc;">' + center.ins_name + '</h2>' +
-                    '<div style="display: flex; align-items: center; margin-bottom: 10px;">' +
-                    '<i class="fas fa-info-circle" style="font-size: 20px; margin-right: 10px;"></i>' +
-                    '<h3 class="info-subtitle" style="font-size: 18px; color: orange;">資訊</h3>' +
-                    '</div>' +
-                    '<p class="info-details" style="font-size: 16px;">' +
-                    '<strong>地址 :</strong> ' + center.addr + '<br>' +
-                    '<strong>管理員 :</strong> ' + center.manager + '<br>' +
-                    '<strong>電話 :</strong> ' + center.phone + '<br>' +
-                    '<strong>網站 :</strong><a href="' + center.website + '">' + center.website + '</a><br>' +
-                    '<div style="display: flex; align-items: center; margin-top: 10px;">' +
-                    '<i class="fas fa-bed" style="font-size: 20px; margin-right: 10px;"></i>' +
-                    '<h3 class="info-subtitle" style="font-size: 18px; color: orange;">床位數</h3>' +
-                    '</div>' +
-                    '<p class="info-details" style="font-size: 16px;">' +
-                    '<strong>養護型床位 :</strong> ' + center.nurse_num + '<br>' +
-                    '<strong>安養型床位 :</strong> ' + center.caring_num + '<br>' +
-                    '<strong>長照型床位 :</strong> ' + center.long_caring_num + '<br>' +
-                    '<strong>失智照顧型床位 :</strong> ' + center.dem_num + '<br>' +
-                    '<strong>使用中床位 :</strong> ' + center.housing_num + '<br>' +
-                    '<strong>提供床位 :</strong> ' + center.providing_num + '<br>' +
-                    '</p>' +
-                    '</div>';
-    
-                    // 建立資訊視窗
-                    let infoWindow = new google.maps.InfoWindow({
-                        content: content
-                    });
-    
-                    // 綁定點擊事件
-                    marker.addListener('click', function() {
-                        infoWindow.open(map, marker);
-                    });
-                    // ...此處省略了為標記添加infoWindow的代碼...
-
-                    return marker;
-                });
-
-                console.log(data); // 打印出獲取的長照中心數據
-            })
-            .catch(error => console.log(error));
+                    markers.forEach(marker => marker.setMap(null));
+                    // 確保此時的 map 是已經被初始化
+                    markers = createMarkers(map, data);
+                    console.log(data); // 打印出獲取的長照中心數據
+                })
+                .catch(error => console.log(error));
+            }
+            else{
+                fetch(baseURL + '?action=getDistricts&city=' + city)
+                .then(response => response.json())
+                .then(data => {
+                    // 清除舊的標記
+                    markers.forEach(marker => marker.setMap(null));
+                    // 確保此時的 map 是已經被初始化
+                    markers = createMarkers(map, data);
+                    console.log(data); // 打印出獲取的長照中心數據
+                })
+                .catch(error => console.log(error));
+            }
+            
         } else {
             alert('Geocode was not successful for the following reason: ' + status);
         }
     });
+}
+
+function createMarkers(map, data) {
+    let temp = data.careCenters ? data.careCenters : data;
+    let infoWindows = [];
+
+    if (window.markers) {
+        for (let i = 0; i < window.markers.length; i++) {
+            window.markers[i].setMap(null);
+        }
+    }
+
+    window.markers = temp.map(center => {
+        let position = new google.maps.LatLng(center.latitude, center.longitude);
+        let marker = new google.maps.Marker({
+            position: position,
+            map: map,
+            icon: 'images/redpin.png'
+        });
+
+        let content = '<div class="info-window">' +
+        '<h2 class="info-title" style="border-bottom: 1px solid #ccc;">' + center.ins_name + '</h2>' +
+        '<div style="display: flex; align-items: center; margin-bottom: 10px;">' +
+        '<i class="fas fa-info-circle" style="font-size: 20px; margin-right: 10px;"></i>' +
+        '<h3 class="info-subtitle" style="font-size: 18px; color: orange;">資訊</h3>' +
+        '</div>' +
+        '<p class="info-details" style="font-size: 16px;">' +
+        '<strong>地址 :</strong> ' + center.addr + '<br>' +
+        '<strong>管理員 :</strong> ' + center.manager + '<br>' +
+        '<strong>電話 :</strong> ' + center.phone + '<br>' +
+        '<strong>網站 :</strong><a href="' + center.website + '">' + center.website + '</a><br>' +
+        '<div style="display: flex; align-items: center; margin-top: 10px;">' +
+        '<i class="fas fa-bed" style="font-size: 20px; margin-right: 10px;"></i>' +
+        '<h3 class="info-subtitle" style="font-size: 18px; color: orange;">床位數</h3>' +
+        '</div>' +
+        '<p class="info-details" style="font-size: 16px;">' +
+        '<strong>養護型床位 :</strong> ' + center.nurse_num + '<br>' +
+        '<strong>安養型床位 :</strong> ' + center.caring_num + '<br>' +
+        '<strong>長照型床位 :</strong> ' + center.long_caring_num + '<br>' +
+        '<strong>失智照顧型床位 :</strong> ' + center.dem_num + '<br>' +
+        '<strong>使用中床位 :</strong> ' + center.housing_num + '<br>' +
+        '<strong>提供床位 :</strong> ' + center.providing_num + '<br>' +
+        '</p>' +
+        '</div>';
+
+        let infoWindow = new google.maps.InfoWindow({
+            content: content
+        });
+
+        marker.addListener('click', function() {
+            if (infoWindows.length >= 2) {
+                infoWindows[0].close();
+                infoWindows.shift();
+            }
+            infoWindow.open(map, marker);
+            infoWindows.push(infoWindow);
+        });
+
+        return marker;
+    });
+
+    return window.markers;
 }

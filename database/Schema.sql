@@ -41,8 +41,8 @@ CREATE TABLE
         addr varchar(100) NOT NULL,
         city char(30) NOT NULL,
         dist varchar(50) NOT NULL,
-        longitude float NOT NULL,
-        latitude float NOT NULL,
+        longitude double NOT NULL,
+        latitude double NOT NULL,
         PRIMARY KEY (ins_num)
     );
 
@@ -86,8 +86,8 @@ CREATE TABLE
         dist_num int AUTO_INCREMENT,
         city varchar(14) NOT NULL,
         dist VARCHAR(14) NOT NULL,
-        longitude FLOAT NOT NULL,
-        latitude FLOAT NOT NULL,
+        longitude double NOT NULL,
+        latitude double NOT NULL,
         PRIMARY KEY (dist_num)
     );
 
@@ -113,16 +113,16 @@ CREATE TABLE
         dementia int,
         caring int,
         total_toll int,
-        latitude float,
-        longitude float
+        latitude double,
+        longitude double
     );
 
 CREATE TABLE
     tmp2 (
         addr varchar(20),
         ma3 char(3),
-        longitude FLOAT,
-        latitude FLOAT,
+        longitude double,
+        latitude double,
         TGOS_URL VARCHAR(250)
     );
 
