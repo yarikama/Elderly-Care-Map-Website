@@ -39,7 +39,8 @@
         <div class="collapse navbar-collapse" id="topNav">
           <ul class="nav navbar-nav">
             <?php if(isset($_SESSION['member']['member_type']) && $_SESSION['member']['member_type'] == 2): ?>
-              <li class="nav-item"><a class="nav-link" href="manage_system.php"><span class="fa fa-th-list"></span> 管理系統</a></li>
+              <li class="nav-item"><a class="nav-link" href="admin_customer.php"><span class="fa fa-th-list"></span> 顧客管理</a></li>
+              <li class="nav-item"><a class="nav-link" href="manage_system.php"><span class="fa fa-th-list"></span> 機構管理</a></li>
               <li class="nav-item"><a class="nav-link" href="admin_ins_add.php"><span class="fa fa-add"></span> 新增機構</a></li>
               <li class="nav-item"><a class="nav-link" href="admin_add.php"><span class="fa fa-user-plus"></span> 新增管理員</a></li>
 			        <li class="nav-item"><a class="nav-link" href="admin_logout.php"><span class="fa fa-sign-out-alt"></span> 管理員登出</a></li>
