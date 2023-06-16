@@ -92,12 +92,18 @@ function geocodeAddress() {
 
             console.log(result)
             // 新增一個地圖標記
+            if (window.marker) {
+                window.marker.setMap(null);
+            }
+            
             let marker = new google.maps.Marker({
                 position: position,
                 map: map,
                 icon: 'images/originLocation.png'
             });
-
+            
+            // 將新建的標記存入 window.marker 變數
+            window.marker = marker;
             // 獲取該地址的縣市和區縣
             let city, dist;
             for (let i = 0; i < results[0].address_components.length; i++) {
