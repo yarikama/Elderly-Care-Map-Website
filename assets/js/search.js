@@ -165,10 +165,19 @@ function createMarkers(map, data) {
 
     window.markers = temp.map(center => {
         let position = new google.maps.LatLng(center.latitude, center.longitude);
+        let icon;
+        if (center.providing_num > 40) {
+            icon = 'images/greenpin.png';
+        } else if (center.providing_num > 25 && center.providing_num <= 40) {
+            icon = 'images/yellowpin.png';
+        } else {
+            icon = 'images/redpin.png';
+        }
+
         let marker = new google.maps.Marker({
             position: position,
             map: map,
-            icon: 'images/redpin.png'
+            icon: icon
         });
 
         let content = '<div class="info-window">' +
