@@ -8,6 +8,7 @@ radiusButtons.forEach(button => {
     });
 });
 
+
 document.addEventListener("DOMContentLoaded", function() {
     let countySelect = document.getElementById('select-county');
     let districtSelect = document.getElementById('select-district');
@@ -192,7 +193,7 @@ function createMarkers(map, data) {
         let rest = parseInt(center.housing_num) - parseInt(center.providing_num);
         if (rest > 10) {
             icon = 'images/greenpin.png';
-        } else if (rest > 5 && rest <= 10) {
+        } else if (rest <= 10 && rest > 0) {
             icon = 'images/yellowpin.png';
         } else {
             icon = 'images/redpin.png';
