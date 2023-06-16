@@ -127,8 +127,8 @@
 									<td class="px-2 py-1 align-middle"><?php echo $row['addr']; ?></td>
 									<td class="px-2 py-1 align-middle text-center">
 										<div class="btn-group btn-group-sm">
-											<a href="admin_edit_ins.php?insnum=<?php echo $row['institution.ins_num']; ?>" class="btn btn-sm rounded-0 btn-primary" title="編輯"><i class="fa fa-edit"></i></a>
-											<a href="admin_delete_ins.php?insnum=<?php echo $row['institution.ins_num']; ?>" class="btn btn-sm rounded-0 btn-danger" title="刪除" onclick="if(confirm('確定要刪除此長照機構?') === false) event.preventDefault()"><i class="fa fa-trash"></i></a>
+											<a href="admin_edit_ins.php?insnum=<?php echo $row['ins_num']; ?>" class="btn btn-sm rounded-0 btn-primary" title="編輯"><i class="fa fa-edit"></i></a>
+											<a href="admin_delete_ins.php?insnum=<?php echo $row['ins_num']; ?>" class="btn btn-sm rounded-0 btn-danger" title="刪除" onclick="if(confirm('確定要刪除此長照機構?') === false) event.preventDefault()"><i class="fa fa-trash"></i></a>
 										</div>
 									</td>
 								</tr>
