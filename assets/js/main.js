@@ -56,7 +56,7 @@ function initMap() {
         });
         markers.push(Center);
         
-    // geocode the current position to get city and district
+        // geocode the current position to get city and district
         geocoder.geocode({location: myLatLng}, function(results, status) {
             if (status === 'OK') {
                 let result = results[0];
