@@ -79,6 +79,7 @@ function getCenters($conn, $city, $district) {
     echo json_encode($centers);
 }
 
+
 function getLevelStandard(){
     $query = "SELECT AVG()
               JOIN 

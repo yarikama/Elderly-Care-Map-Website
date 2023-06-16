@@ -76,6 +76,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 // 搜尋地址後將地圖中心設為該地址並顯示該區域的長照地點
 function geocodeAddress() {
+
     let address = document.getElementById('address').value;
     let geocoder = new google.maps.Geocoder();
 
@@ -150,7 +151,6 @@ function geocodeAddress() {
 function createMarkers(map, data) {
     let temp = data.careCenters ? data.careCenters : data;
     let infoWindows = [];
-
     if (window.markers) {
         for (let i = 0; i < window.markers.length; i++) {
             window.markers[i].setMap(null);
@@ -188,6 +188,10 @@ function createMarkers(map, data) {
         '<strong>使用中床位 :</strong> ' + center.housing_num + '<br>' +
         '<strong>提供床位 :</strong> ' + center.providing_num + '<br>' +
         '</p>' +
+        '<form method="post" action="process.php">' +
+        '<input type="hidden" name="ins_num" value="' + center.ins_num + '">' +
+        '<button type="submit" name="good_list" class="btn btn-primary me-2">加入喜愛列表</button>' +
+        '</form>' +
         '</div>';
 
         let infoWindow = new google.maps.InfoWindow({
