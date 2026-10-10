@@ -376,3 +376,8 @@ FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\n';
 ## License
 
 This project is an academic database course final project.
+
+## Local Setup
+
+Copy `config.example.php` to `config.php` and fill in your Google Maps API key and MySQL
+credentials. `config.php` is gitignored, so real credentials never reach the repo.
